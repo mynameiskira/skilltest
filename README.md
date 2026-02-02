@@ -1,5 +1,9 @@
 # SkillTest Platform
 
+![CI Pipeline](https://github.com/mynameiskira/skilltest/actions/workflows/ci.yml/badge.svg)
+![CD Pipeline](https://github.com/mynameiskira/skilltest/actions/workflows/cd.yml/badge.svg)
+
+
 SkillTest is a comprehensive SaaS platform for automated technical assessments. It enables recruiters to evaluate candidates' skills through timed tests with cheat detection, automated scoring, and detailed analytics.
 
 ## 🚀 Features
