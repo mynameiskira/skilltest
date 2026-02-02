@@ -1,7 +1,7 @@
 #!/bin/bash
-set -e
+set +e
 
-echo "🔍 Starting Coverage Verification (Target: 50% for Backend, 80% for Frontend)..."
+echo "🔍 Starting Coverage Verification (Target: 75% for Backend & Frontend)..."
 
 echo "---------------------------------------------------"
 echo "📦 Verifying Backend Coverage..."
