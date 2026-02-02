@@ -361,9 +361,13 @@ app.patch('/api/results/:id/review', authenticateToken, authorizeRoles('admin', 
 
 const PORT = Number(process.env.PORT) || 5001;
 
-sequelize.sync().then(() => {
-    app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
-}).catch(err => {
-    console.error('Database connection failed:', err);
-    app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT} (DB offline)`));
-});
+if (require.main === module) {
+    sequelize.sync().then(() => {
+        app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
+    }).catch(err => {
+        console.error('Database connection failed:', err);
+        app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT} (DB offline)`));
+    });
+}
+
+export default app;
