@@ -93,4 +93,4 @@ Result.belongsTo(User);
 Test.hasMany(Result);
 Result.belongsTo(Test);
 
-export { User, Test, Question, Result };
+export { User, Test, Question, Result, sequelize };

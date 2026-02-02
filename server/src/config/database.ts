@@ -16,7 +16,7 @@ const sequelize = process.env.DB_HOST
     )
     : new Sequelize({
         dialect: 'sqlite',
-        storage: './database.sqlite',
+        storage: process.env.DB_STORAGE || './database.sqlite',
         logging: false
     });
 

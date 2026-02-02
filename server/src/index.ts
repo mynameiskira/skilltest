@@ -359,9 +359,11 @@ app.patch('/api/results/:id/review', authenticateToken, authorizeRoles('admin', 
 });
 
 
+import * as url from 'url';
+
 const PORT = Number(process.env.PORT) || 5001;
 
-if (require.main === module) {
+if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
     sequelize.sync().then(() => {
         app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
     }).catch(err => {

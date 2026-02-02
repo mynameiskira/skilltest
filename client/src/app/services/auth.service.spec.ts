@@ -26,7 +26,7 @@ describe('AuthService', () => {
     it('login should store token on success', () => {
         const mockResponse = { token: 'fake-token', user: { id: 1, role: 'admin' } };
 
-        service.login('test@example.com', 'password').subscribe(response => {
+        service.login({ email: 'test@example.com', password: 'password' }).subscribe(response => {
             expect(response.token).toBe('fake-token');
             expect(localStorage.getItem('token')).toBe('fake-token');
         });
