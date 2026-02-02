@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: skilltest_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: skilltest
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: skilltest_user
+      MYSQL_PASSWORD: skilltest_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build: ./server
+    container_name: skilltest_backend
+    restart: always
+    ports:
+      - "5001:5001"
+    environment:
+      DB_HOST: db
+      DB_USER: skilltest_user
+      DB_PASS: skilltest_password
+      DB_NAME: skilltest
+      JWT_SECRET: skilltest_secret_key_2025
+    depends_on:
+      - db
+
+  frontend:
+    build: ./client
+    container_name: skilltest_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:

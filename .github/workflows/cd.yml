@@ -1,0 +1,58 @@
+name: CD Pipeline
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Extract version from tag
+      id: get_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+        
+    - name: Build backend
+      working-directory: ./server
+      run: |
+        npm ci
+        npm run build --if-present
+        
+    - name: Build frontend
+      working-directory: ./client
+      run: |
+        npm ci
+        npm run build -- --configuration production
+        
+    - name: Create release archive
+      run: |
+        mkdir -p release
+        cp -r server/dist release/server || cp -r server release/
+        cp -r client/dist release/client || cp -r client/dist release/
+        tar -czf skilltest-${{ steps.get_version.outputs.VERSION }}.tar.gz release/
+        
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: skilltest-${{ steps.get_version.outputs.VERSION }}.tar.gz
+        generate_release_notes: true
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Deploy notification
+      run: |
+        echo "Deployment completed for version ${{ steps.get_version.outputs.VERSION }}"
+        echo "Release available at: https://github.com/${{ github.repository }}/releases/tag/${{ steps.get_version.outputs.VERSION }}"

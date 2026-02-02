@@ -1,0 +1,503 @@
+<!-- Custom Notification Toast -->
+@if (notification().show) {
+<div class="fixed top-8 right-8 z-[200] animate-slide-in-right">
+    <div class="glass-pane px-6 py-4 min-w-[320px] shadow-[0_8px_32px_rgba(0,0,0,0.4)] border-l-4" [ngClass]="{
+            'border-l-accent-success': notification().type === 'success',
+            'border-l-accent-error': notification().type === 'error',
+            'border-l-primary': notification().type === 'info'
+        }">
+        <div class="flex items-center gap-4">
+            <!-- Icon -->
+            <div class="flex-shrink-0">
+                @if (notification().type === 'success') {
+                <div class="w-10 h-10 rounded-full bg-accent-success/20 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" class="text-accent-success">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                </div>
+                }
+                @if (notification().type === 'error') {
+                <div class="w-10 h-10 rounded-full bg-accent-error/20 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" class="text-accent-error">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </div>
+                }
+                @if (notification().type === 'info') {
+                <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="3" class="text-primary">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg>
+                </div>
+                }
+            </div>
+
+            <!-- Message -->
+            <div class="flex-1">
+                <p class="text-white font-medium text-sm">{{ notification().message }}</p>
+            </div>
+
+            <!-- Close Button -->
+            <button (click)="notification.set({show: false, type: 'success', message: ''})"
+                class="flex-shrink-0 text-text-dim hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+<div class="animate-fade-in">
+    <div class="flex justify-between items-end mb-12">
+        <div>
+            <h1 class="text-4xl font-bold mb-2">Recruiter <span class="text-gradient">Control Center</span></h1>
+            <p class="text-text-muted">Manage modules and track candidate performance.</p>
+        </div>
+        <div class="flex p-1 bg-white/5 rounded-xl backdrop-blur-sm self-stretch md:self-auto">
+            <button (click)="view.set('analytics')" [class.bg-primary]="view() === 'analytics'"
+                [class.text-white]="view() === 'analytics'"
+                class="px-6 py-2 rounded-lg text-sm font-bold transition-all text-text-dim hover:text-white">Analytics</button>
+            <button (click)="view.set('management')" [class.bg-primary]="view() === 'management'"
+                [class.text-white]="view() === 'management'"
+                class="px-6 py-2 rounded-lg text-sm font-bold transition-all text-text-dim hover:text-white">Manage
+                Tests</button>
+            <button (click)="view.set('pricing')" [class.bg-primary]="view() === 'pricing'"
+                [class.text-white]="view() === 'pricing'"
+                class="px-6 py-2 rounded-lg text-sm font-bold transition-all text-text-dim hover:text-white">Plans</button>
+        </div>
+    </div>
+
+    @if (view() === 'analytics') {
+    <!-- Stats & Table -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div class="glass-pane p-8 border-l-4 border-l-primary">
+            <div class="text-text-dim text-xs font-bold uppercase tracking-widest mb-4">Total Submissions</div>
+            <div class="text-4xl font-extrabold">{{ results().length }}</div>
+        </div>
+        <div class="glass-pane p-8 border-l-4 border-l-accent-success">
+            <div class="text-text-dim text-xs font-bold uppercase tracking-widest mb-4">Avg Quality Score</div>
+            <div class="text-4xl font-extrabold text-accent-success">{{ getAverageScore() }}</div>
+        </div>
+        <div class="glass-pane p-8 border-l-4 border-l-accent-warning">
+            <div class="text-text-dim text-xs font-bold uppercase tracking-widest mb-4">Active Pool</div>
+            <div class="text-4xl font-extrabold text-accent-warning">{{ getUniqueCandidates() }}</div>
+        </div>
+    </div>
+
+    <!-- Results Table -->
+    <div class="glass-pane overflow-hidden">
+        <table class="w-full text-left">
+            <thead>
+                <tr
+                    class="text-[10px] font-bold text-text-dim uppercase tracking-widest border-b border-white/5 bg-white/[0.02]">
+                    <th class="px-8 py-5">Candidate</th>
+                    <th class="px-8 py-5">Test Module</th>
+                    <th class="px-8 py-5 text-center">Score</th>
+                    <th class="px-8 py-5">Result</th>
+                    <th class="px-8 py-5 text-right">Date</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5">
+                @for (res of results(); track res.id) {
+                <tr class="hover:bg-white/[0.01] transition-colors group">
+                    <td class="px-8 py-6">
+                        <div class="font-bold text-white">{{ res.User?.username }}</div>
+                        <div class="text-xs text-text-dim">{{ res.User?.email }}</div>
+                    </td>
+                    <td class="px-8 py-6">
+                        <div class="text-[10px] font-bold text-primary mb-1 uppercase">{{ res.Test?.language }}</div>
+                        <div class="font-medium text-sm text-text-muted">{{ res.Test?.title }}</div>
+                    </td>
+                    <td class="px-8 py-6 text-center">
+                        <div class="font-extrabold text-lg text-white">{{ res.score }} <span
+                                class="text-text-dim font-normal text-xs">/ {{ res.maxScore }}</span></div>
+                    </td>
+                    <td class="px-8 py-6">
+                        <span (click)="res.score/res.maxScore < 0.7 ? openReviewModal(res) : null"
+                            class="px-3 py-1 rounded-full text-[10px] font-bold uppercase"
+                            [ngClass]="res.score/res.maxScore >= 0.7 ? 'bg-accent-success/10 text-accent-success' : 'bg-accent-warning/10 text-accent-warning cursor-pointer hover:bg-accent-warning/20 transition-colors'">
+                            {{ res.score/res.maxScore >= 0.7 ? 'Qualified' : 'Review' }}
+                            @if (res.reviewStatus === 'approved') {
+                            <span class="ml-1">✓</span>
+                            } @else if (res.reviewStatus === 'rejected') {
+                            <span class="ml-1">✗</span>
+                            }
+                        </span>
+                    </td>
+                    <td class="px-8 py-6 text-right text-text-dim text-xs">{{ res.completedAt | date:'mediumDate' }}
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    } @else if (view() === 'management') {
+    <!-- Test Management UI -->
+    <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold">Module <span class="text-gradient">Repository</span></h2>
+        <button (click)="openCreateModal()" class="btn btn-primary shadow-lg shadow-primary/20">+ Create New
+            Test</button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @for (test of tests(); track test.id) {
+        <div class="glass-pane p-8 group hover:border-primary/50 transition-all flex flex-col h-full">
+            <div class="flex justify-between items-start mb-6">
+                <span
+                    class="bg-primary/10 text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">{{
+                    test.language }}</span>
+                <div class="flex gap-2">
+                    <button (click)="editTest(test)"
+                        class="p-2 hover:bg-white/5 rounded-md text-text-dim hover:text-white transition-all"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                            <path d="m15 5 4 4" />
+                        </svg></button>
+                    <button (click)="deleteTest(test.id)"
+                        class="p-2 hover:bg-accent-error/10 rounded-md text-text-dim hover:text-accent-error transition-all"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18" />
+                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                        </svg></button>
+                </div>
+            </div>
+            <h3 class="text-xl font-bold mb-4 group-hover:text-primary transition-colors">{{ test.title }}</h3>
+            <p class="text-text-dim text-sm line-clamp-3 mb-8 flex-grow">{{ test.description }}</p>
+            <div
+                class="flex justify-between text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] pt-6 border-t border-white/5">
+                <span class="flex items-center gap-1">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    {{ test.duration }} mins
+                </span>
+                <span>BY {{ test.creator?.username || 'SYSTEM' }}</span>
+            </div>
+        </div>
+        }
+    </div>
+    } @else if (view() === 'pricing') {
+    <!-- Pricing Plans for Recruiters -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Starter Plan -->
+        <div class="glass-pane p-10 flex flex-col border-white/5">
+            <h3 class="text-xl font-bold mb-2">Starter</h3>
+            <div class="text-4xl font-extrabold mb-6">€0 <span class="text-sm font-normal text-text-dim">/mo</span>
+            </div>
+            <ul class="space-y-4 mb-10 flex-grow text-sm text-text-muted">
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> 5 Tests / month</li>
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> 50 Candidates</li>
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> Basic Analytics</li>
+            </ul>
+            <button disabled class="btn btn-secondary w-full py-3 opacity-50 cursor-not-allowed">Current Plan</button>
+        </div>
+
+        <!-- Pro Plan -->
+        <div class="glass-pane p-10 flex flex-col border-primary/30 ring-1 ring-primary/20 bg-primary/5">
+            <div class="text-[10px] font-bold text-primary uppercase tracking-widest mb-4">Most Popular</div>
+            <h3 class="text-xl font-bold mb-2">Pro Recruiter</h3>
+            <div class="text-4xl font-extrabold mb-6">€49 <span class="text-sm font-normal text-text-dim">/mo</span>
+            </div>
+            <ul class="space-y-4 mb-10 flex-grow text-sm text-text-muted">
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> Unlimited Tests</li>
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> Unlimited Candidates</li>
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> Advanced Analytics</li>
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> Custom Test Builder</li>
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> Priority Support</li>
+            </ul>
+            <button (click)="buyPlan('pro')" class="btn btn-primary w-full py-3">Upgrade to Pro</button>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div class="glass-pane p-10 flex flex-col border-white/5">
+            <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+            <div class="text-4xl font-extrabold mb-6">Custom</div>
+            <ul class="space-y-4 mb-10 flex-grow text-sm text-text-muted">
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> Everything in Pro</li>
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> Multi-Team Management</li>
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> White-Label Solution</li>
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> SSO & Advanced Security</li>
+                <li class="flex items-center gap-2"><svg class="text-primary" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg> Dedicated Account Manager</li>
+            </ul>
+            <button (click)="buyPlan('enterprise')" class="btn btn-secondary w-full py-3">Contact Sales</button>
+        </div>
+    </div>
+    }
+</div>
+
+<!-- Simple Creation Modal -->
+@if (showModal()) {
+<div class="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-fade-in">
+    <div class="glass-pane max-w-[600px] w-full overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+        <!-- Modal Header -->
+        <div class="px-10 py-8 border-b border-white/5 bg-white/[0.02] flex justify-between items-center">
+            <div>
+                <h2 class="text-2xl font-bold text-white">{{ editingTestId ? 'Edit' : 'Create' }} <span
+                        class="text-gradient">Assessment</span></h2>
+                <p class="text-text-dim text-xs mt-1">Define the parameters of your technical evaluation.</p>
+            </div>
+            <button (click)="showModal.set(false)" class="text-text-dim hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+
+        <form (ngSubmit)="saveTest()" class="p-10 space-y-8">
+            <div class="space-y-6">
+                <div>
+                    <label>Test Title</label>
+                    <input name="testTitle" [(ngModel)]="formData().title" class="input-field"
+                        placeholder="e.g., Advanced TypeScript" required>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <label>Language</label>
+                        <input name="testLanguage" [(ngModel)]="formData().language" class="input-field"
+                            placeholder="JavaScript" required>
+                    </div>
+                    <div>
+                        <label>Duration (min)</label>
+                        <input name="testDuration" type="number" [(ngModel)]="formData().duration" class="input-field"
+                            placeholder="20" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label>Description</label>
+                    <textarea name="testDescription" [(ngModel)]="formData().description"
+                        class="input-field resize-none" placeholder="What will candidates be tested on?"></textarea>
+                </div>
+
+                <!-- Adaptive Difficulty Toggle -->
+                <div class="glass-pane p-6 border-l-4 border-l-primary/50">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" class="text-primary">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                </svg>
+                                <h4 class="text-white font-bold text-sm">Adaptive Difficulty Engine</h4>
+                                <span
+                                    class="px-2 py-0.5 bg-primary/20 text-primary text-[10px] font-bold rounded uppercase">Beta</span>
+                            </div>
+                            <p class="text-text-muted text-xs leading-relaxed">
+                                Questions adapt dynamically based on candidate performance. Easy questions after wrong
+                                answers, harder ones after correct responses.
+                            </p>
+                        </div>
+
+                        <!-- Toggle Switch -->
+                        <label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+                            <input type="checkbox" name="adaptiveDifficulty" [(ngModel)]="formData().adaptiveDifficulty"
+                                class="sr-only peer">
+                            <div class="w-14 h-7 bg-white/10 peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer 
+                                peer-checked:after:translate-x-full peer-checked:after:border-white 
+                                after:content-[''] after:absolute after:top-[2px] after:left-[2px] 
+                                after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all 
+                                peer-checked:bg-primary border border-white/20"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-4 pt-4">
+                <button type="button" (click)="showModal.set(false)"
+                    class="btn btn-secondary flex-1 justify-center">Cancel</button>
+                <button type="submit" class="btn btn-primary flex-1 justify-center">
+                    {{ editingTestId ? 'Update' : 'Create' }} Module
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+}
+
+<!-- Review Modal -->
+@if (showReviewModal() && reviewingResult()) {
+<div
+    class="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-fade-in overflow-y-auto">
+    <div class="glass-pane max-w-[900px] w-full my-8 overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+        <!-- Modal Header -->
+        <div
+            class="px-10 py-8 border-b border-white/5 bg-white/[0.02] flex justify-between items-start sticky top-0 z-10">
+            <div class="flex-1">
+                <h2 class="text-2xl font-bold text-white mb-2">Review <span class="text-gradient">Assessment</span></h2>
+                <div class="space-y-1 text-sm">
+                    <p class="text-text-muted"><span class="text-primary font-bold">Candidate:</span> {{
+                        reviewingResult().User?.username }}</p>
+                    <p class="text-text-muted"><span class="text-primary font-bold">Test:</span> {{
+                        reviewingResult().Test?.title }}</p>
+                    <p class="text-text-muted"><span class="text-primary font-bold">Score:</span>
+                        <span class="text-white font-bold">{{ reviewingResult().score }} / {{ reviewingResult().maxScore
+                            }}</span>
+                        <span class="ml-2"
+                            [ngClass]="reviewingResult().score/reviewingResult().maxScore >= 0.7 ? 'text-accent-success' : 'text-accent-warning'">
+                            ({{ ((reviewingResult().score/reviewingResult().maxScore) * 100).toFixed(0) }}%)
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <button (click)="showReviewModal.set(false)" class="text-text-dim hover:text-white transition-colors ml-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Questions and Answers -->
+        <div class="p-10 space-y-6 max-h-[60vh] overflow-y-auto">
+            @for (question of reviewingResult().Test?.Questions; track question.id; let i = $index) {
+            <div class="glass-pane p-6 border-l-4"
+                [ngClass]="reviewingResult().answers?.[question.id] === question.correctAnswer ? 'border-l-accent-success' : 'border-l-accent-error'">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-white font-bold">Question {{ i + 1 }}</h3>
+                    <span class="text-xs font-bold px-2 py-1 rounded"
+                        [ngClass]="reviewingResult().answers?.[question.id] === question.correctAnswer ? 'bg-accent-success/20 text-accent-success' : 'bg-accent-error/20 text-accent-error'">
+                        {{ reviewingResult().answers?.[question.id] === question.correctAnswer ? 'Correct' : 'Incorrect'
+                        }}
+                    </span>
+                </div>
+
+                <p class="text-text-muted mb-4">{{ question.content }}</p>
+
+                <div class="space-y-2">
+                    @for (option of question.options; track $index) {
+                    <div class="p-3 rounded-lg border transition-colors" [ngClass]="{
+                            'border-accent-success bg-accent-success/10': $index === question.correctAnswer,
+                            'border-accent-error bg-accent-error/10': $index === reviewingResult().answers?.[question.id] && $index !== question.correctAnswer,
+                            'border-white/10 bg-white/5': $index !== question.correctAnswer && $index !== reviewingResult().answers?.[question.id]
+                        }">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm" [ngClass]="{
+                                'text-accent-success font-bold': $index === question.correctAnswer,
+                                'text-accent-error': $index === reviewingResult().answers?.[question.id] && $index !== question.correctAnswer,
+                                'text-text-muted': $index !== question.correctAnswer && $index !== reviewingResult().answers?.[question.id]
+                            }">{{ option }}</span>
+                            @if ($index === question.correctAnswer) {
+                            <span class="text-accent-success text-xs font-bold">✓ Correct Answer</span>
+                            }
+                            @if ($index === reviewingResult().answers?.[question.id] && $index !==
+                            question.correctAnswer) {
+                            <span class="text-accent-error text-xs font-bold">✗ Candidate's Answer</span>
+                            }
+                            @if ($index === reviewingResult().answers?.[question.id] && $index ===
+                            question.correctAnswer) {
+                            <span class="text-accent-success text-xs font-bold">✓ Candidate's Answer</span>
+                            }
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="px-10 py-6 border-t border-white/5 bg-white/[0.02] flex gap-4 sticky bottom-0">
+            <button type="button" (click)="showReviewModal.set(false)"
+                class="btn btn-secondary flex-1 justify-center">Close</button>
+            <button type="button" (click)="rejectTest()"
+                class="btn flex-1 justify-center bg-accent-error/10 text-accent-error hover:bg-accent-error/20 border-accent-error/30">
+                ✗ Reject Test
+            </button>
+            <button type="button" (click)="approveTest()" class="btn btn-primary flex-1 justify-center">
+                ✓ Approve Test
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+<!-- Confirmation Dialog -->
+@if (showConfirmDialog()) {
+<div class="fixed inset-0 bg-black/80 backdrop-blur-md z-[150] flex items-center justify-center p-4 animate-fade-in">
+    <div class="glass-pane max-w-md w-full p-8 shadow-[0_0_50px_rgba(0,0,0,0.5)] animate-scale-in">
+        <!-- Icon -->
+        <div class="w-16 h-16 rounded-full bg-accent-error/20 flex items-center justify-center mx-auto mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" class="text-accent-error">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+        </div>
+
+        <!-- Content -->
+        <h3 class="text-xl font-bold text-white text-center mb-3">Reject Test?</h3>
+        <p class="text-text-muted text-center mb-8">
+            Are you sure you want to reject this test? This action cannot be undone.
+        </p>
+
+        <!-- Actions -->
+        <div class="flex gap-3">
+            <button (click)="showConfirmDialog.set(false)" class="btn btn-secondary flex-1 justify-center">
+                Cancel
+            </button>
+            <button (click)="confirmReject()"
+                class="btn flex-1 justify-center bg-accent-error/10 text-accent-error hover:bg-accent-error/20 border border-accent-error/30">
+                Yes, Reject
+            </button>
+        </div>
+    </div>
+</div>
+}

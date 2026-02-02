@@ -1,0 +1,51 @@
+<nav class="h-20 border-b border-white/5 backdrop-blur-md sticky top-0 z-50 bg-bg-main/80">
+  <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
+    <!-- Logo -->
+    <a routerLink="/" class="flex items-center gap-3 group">
+      <div
+        class="w-10 h-10 bg-gradient-to-br from-primary to-accent-info rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:scale-110 transition-transform duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="text-white" width="24" height="24" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m16 6 4 14" />
+          <path d="M12 6v14" />
+          <path d="M8 6 4 20" />
+          <path d="M2 20h20" />
+        </svg>
+      </div>
+      <span class="text-2xl font-bold tracking-tight text-white group-hover:text-primary transition-colors">Skill<span
+          class="text-text-dim font-light">Test</span></span>
+    </a>
+
+    <!-- Nav Links -->
+    <div class="flex items-center gap-8">
+      @if (auth.isLoggedIn()) {
+      <!-- Dynamic Links based on role -->
+      @if (auth.isAdmin()) {
+      <a routerLink="/admin" routerLinkActive="text-primary"
+        class="text-sm font-bold text-text-dim hover:text-white transition-colors">Admin Panel</a>
+      }
+      @if (auth.isRecruiter() || auth.isAdmin()) {
+      <a routerLink="/recruiter" routerLinkActive="text-primary"
+        class="text-sm font-bold text-text-dim hover:text-white transition-colors">Recruiter Insights</a>
+      }
+
+      <a routerLink="/dashboard" routerLinkActive="text-primary"
+        class="text-sm font-bold text-text-dim hover:text-white transition-colors">Assessment Lab</a>
+
+      <div class="h-6 w-px bg-white/10 mx-2"></div>
+
+      <div class="flex items-center gap-4">
+        <div class="text-right hidden sm:block">
+          <div class="text-xs font-bold text-white">{{ auth.currentUser().username }}</div>
+          <div class="text-[10px] text-text-dim uppercase tracking-tighter">{{ auth.currentUser().role }}</div>
+        </div>
+        <button (click)="auth.logout()" class="btn btn-secondary py-2 px-4 text-xs font-bold border border-white/10">
+          Log Out
+        </button>
+      </div>
+      } @else {
+      <a routerLink="/login" class="btn btn-primary px-6 py-2.5 shadow-xl shadow-primary/10">Sign In</a>
+      }
+    </div>
+  </div>
+</nav>

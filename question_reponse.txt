@@ -1,0 +1,114 @@
+1. Gestion de Projet & Méthodologie (Bloc 1)
+Question Classique :
+
+Q : Vous avez travaillé seul. Pourquoi avoir choisi une méthode Agile/Scrum qui est pensée pour les équipes ?
+
+
+Réponse : Bien que seul, la méthode Agile m'a permis de structurer mon travail en itérations courtes (Sprints) et de rester flexible face aux imprévus. J'ai utilisé un Kanban pour visualiser mon flux de travail et ne pas me laisser déborder. Cela m'a aussi forcé à avoir une rigueur de livraison : une fonctionnalité n'est "finie" que si elle est testée et documentée.
++2
+
+Question "De Bâtard" (Piège) :
+
+Q : Dans votre budget prévisionnel, vous valorisez le projet à environ 24 500 €. N'est-ce pas totalement irréaliste pour un MVP développé par un junior en 3 mois ? Une agence le facturerait le double.
+
+Réponse : C'est une observation pertinente. Mon estimation se base sur une valorisation des coûts de production "secs" (TJM junior à 350€). Une agence ajouterait effectivement une marge commerciale, des frais de structure et un TJM plus élevé pour des seniors. Ce chiffre sert surtout à démontrer la rentabilité potentielle du projet pour un investissement interne (ROI) par rapport au coût d'un recrutement raté.
++1
+
+Autre Question Piège :
+
+Q : Vous parlez de "Chef de projet", "Lead Dev", "Testeur". En réalité, vous avez juste tout fait tout seul. Comment avez-vous évité le biais de confirmation (se dire que son code est bon sans avis extérieur) ?
+
+Réponse : C'est le plus gros risque du développeur solo. Pour atténuer cela, j'ai mis en place des outils d'analyse statique (ESLint, SonarQube/Audit) qui ne mentent pas sur la qualité du code. J'ai aussi soumis mes maquettes à des utilisateurs réels pour valider l'UX avant de coder, et j'ai documenté mes choix (ADR - Architecture Decision Records) pour m'obliger à les justifier rationnellement.
++1
+
+2. Architecture & Choix Techniques (Bloc 1 & 3)
+Question Classique :
+
+Q : Pourquoi avoir choisi une base SQL (MySQL) plutôt que NoSQL (MongoDB), alors que vos tests sont des objets JSON qui changent souvent ?
+
+Réponse : J'ai privilégié l'intégrité des données. SkillTest gère des relations strictes (Candidat <-> Résultat <-> Test) qui nécessitent une forte cohérence transactionnelle que le SQL garantit. J'ai normalisé ma base en 3ème forme normale. Cependant, je suis conscient qu'une approche hybride (NoSQL pour stocker le contenu brut des questions, SQL pour les relations) pourrait être une évolution future pour la scalabilité.
++2
+
+Question Technique Pointue :
+
+Q : Vous utilisez Node.js (Single Thread). Que se passe-t-il si 50 candidats lancent une compilation de code complexe en même temps ? Votre serveur ne va-t-il pas bloquer ?
+
+Réponse : C'est le point faible de Node.js sur les tâches CPU-intensives. C'est pour cela que j'ai conçu une architecture asynchrone. Pour les traitements lourds (comme la correction ou la compilation), je ne les exécute pas dans le thread principal, mais je les délègue à des files d'attente (Jobs) ou des workers séparés. Cela permet à l'API de rester réactive pour les autres requêtes.
++1
+
+Question "De Bâtard" :
+
+Q : Pourquoi Angular ? C'est lourd, en perte de vitesse face à React ou Vue. Est-ce que ce n'est pas un choix "has been" ?
+
+
+Réponse : Au contraire, Angular 18 a modernisé le framework (Signals, Standalone Components). J'ai choisi Angular pour sa structure stricte et son écosystème tout-en-un (Router, HTTP, Forms inclus), ce qui est vital quand on est seul pour ne pas perdre de temps à assembler des librairies tierces comme avec React. En entreprise, cette robustesse et le typage TypeScript natif sont des atouts majeurs pour la maintenabilité.
++3
+
+3. Développement Front-End (Bloc 2)
+Question Technique (Incontournable) :
+
+Q : Vous mentionnez l'utilisation conjointe de RxJS et des Signals. N'est-ce pas redondant ? Quand utilisez-vous l'un ou l'autre ?
+
+Réponse : Ils sont complémentaires. J'utilise RxJS pour les événements asynchrones complexes (flux de données, requêtes HTTP, temps réel, debouncing). J'utilise les Signals pour la gestion de l'état synchrone de l'interface (mise à jour fine du DOM), car ils offrent une bien meilleure performance que la détection de changement classique (Zone.js).
++1
+
+Question Piège (Accessibilité) :
+
+Q : Vous prétendez respecter le RGAA/WCAG. Avez-vous réellement testé votre site avec un lecteur d'écran les yeux fermés, ou avez-vous juste passé un outil automatique ?
+
+
+Réponse : J'ai utilisé des outils automatiques comme Axe-DevTools pour la conformité technique (contrastes, balises). Mais je sais que ça ne suffit pas. J'ai veillé à la navigation au clavier  et à la sémantique HTML. Pour l'audit final, j'ai vérifié la compatibilité avec NVDA, notamment pour m'assurer que les formulaires de test étaient utilisables sans souris, ce qui est critique pour l'équité des candidats.
++2
+
+4. Back-End, Sécurité & DevOps (Bloc 3)
+Question Sécurité (Critique) :
+
+Q : Comment empêchez-vous concrètement la triche ? Si je suis candidat, je peux ouvrir ChatGPT dans une autre fenêtre ou inspecter le réseau pour voir les réponses.
+
+Réponse : La sécurité totale est impossible à distance, mais je la rends difficile.
+
+
+Côté Client : Je détecte la perte de focus (changement de fenêtre) via JavaScript.
+
+Réseau : Les réponses correctes ne sont jamais envoyées au navigateur du client. La validation se fait uniquement côté serveur (Back-end).
+
+
+Sanitization : Je nettoie toutes les entrées pour éviter qu'un candidat n'injecte du code malveillant (XSS/SQLi) dans ses réponses.
+
+Question "De Bâtard" (Infrastructure) :
+
+Q : Vous parlez de Docker et d'AWS. Si je redémarre votre conteneur MySQL, est-ce que je perds toutes les données ? Avez-vous configuré des volumes persistants ?
+
+Réponse : Absolument pas. J'utilise des volumes Docker pour découpler les données du conteneur lui-même. En production sur AWS, j'utilise idéalement un service managé (RDS) ou des volumes montés pour assurer que la base de données survit au cycle de vie des conteneurs. De plus, un script effectue des dumps quotidiens externalisés.
++1
+
+Question Performance :
+
+Q : Vous dites utiliser des "Transactions SQL". Expliquez-moi un cas concret dans votre code où c'est indispensable.
+
+Réponse : C'est indispensable lors de la soumission d'un test. Il faut enregistrer les réponses aux questions, calculer le score, et mettre à jour le statut du candidat. Si le serveur plante au milieu (par exemple après avoir enregistré les réponses mais avant le score), la base de données serait incohérente. La transaction assure que soit tout est sauvegardé, soit rien ne l'est.
+
+5. Éco-conception & Éthique (Transversal)
+Question "De Bâtard" :
+
+Q : Vous parlez de "Green IT" parce que vous avez mis un "Dark Mode". C'est un peu léger comme argument, non ? C'est du "Greenwashing" ?
+
+
+Réponse : Le Dark Mode n'est que la partie visible (économie d'énergie sur écrans OLED). Ma vraie démarche d'éco-conception est structurelle :
+
+
+Back-end : J'ai optimisé les algorithmes pour réduire la charge CPU  et mis en place des Jobs différés.
+
+
+Données : Je purge automatiquement les données temporaires et les logs anciens pour ne pas stocker de "gras" inutilement.
+
+
+Réseau : L'usage de GraphQL (ou requêtes optimisées) et la compression Gzip réduisent le volume de données transférées.
+
+Conseils pour ta posture le jour J :
+Sois honnête sur les limites : Si le jury trouve une faille (ex: "Ton système de paiement n'a pas de gestion de TVA internationale"), ne cherche pas à bluffer. Dis : "C'est exact, pour ce MVP je me suis concentré sur la France, mais l'architecture permet d'ajouter un module de taxe via l'API Stripe."
+
+Défends tes choix : Ne dis pas "J'ai pris Angular parce qu'on l'a vu en cours". Dis "J'ai pris Angular car pour un développeur solo, avoir une structure imposée évite la dette technique, contrairement à React où on doit tout choisir soi-même".
+
+
+Valorise le Business : Rappelle souvent que ton code sert un but : réduire le coût des recrutements. Tu n'es pas juste un codeur, tu résous un problème d'entreprise.

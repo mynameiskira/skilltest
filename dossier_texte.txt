@@ -1,0 +1,1139 @@
+DOSSIER DE VALIDATION
+CERTIFICATION DÉVELOPPEUR FULL STACK
+Certification inscrite au niveau 6 du Répertoire National des Cer
+tifications Professionnelles sur décision du directeur général de France compétences en date du
+09/02/2024.
+Fiche RNCP38606
+consultable en ligne sur https://www.francecompetences.fr/recherche/rncp/38606/
+Candidat ANOUAR Abdelmajid
+Tuteur LE NET Yves
+Date de soutenance 29/09/2025
+Signature du candidat Signature du tuteur
+0
+SOMMAIRE
+1. INTRODUCTION GÉNÉRALE ET CONTEXTE DU PROJET ..................... p.4
+-
+Contexte du projet et objectif général
+-
+Présentation de l’équipe (Abdelmajid, 21 ans)
+2. BLOC 1 : CONCEVOIR ET MODÉLISER UNE APPLICATION ................. p.5
+A. Note de cadrage et analyse du besoin client ................. p.5
+B. Étude de faisabilité et Proposition de valeur ................. p.6
+C. Planification prévisionnelle et gestion des délais .......... p.7
+D. Gestion budgétaire et ressources projet ..................... p.8
+E. Architecture logicielle et choix techniques ................. p.9
+F. Virtualisation et infrastructure Docker ..................... p.10
+G. Méthodologie Agile et kanban .................... p.11
+H. Suivi d'activité et reporting hebdomadaire .................. p.12
+I. Conception UX/UI et maquettage interactif ................... p.13
+J. Modélisation UML et schéma de données ....................... p.14
+K. Conformité RGPD et sécurité informatique .................... p.16
+L. Veille technologique et innovation logicielle ............... p.17
+M. Analyse des risques (Matrice) ............................... p.18
+3. BLOC 2 : DÉVELOPPER L'INTERFACE UTILISATEUR (FRONT-END) ......... p.19
+A. Intégration visuelle et Design System ....................... p.19
+B. Développement des composants avec Angular ................... p.20
+C. Gestion de l'état asynchrone (Signals/RxJS) ................. p.21
+D. Communication API et services de données .................... p.22
+E. Sécurisation des accès client et JWT ........................ p.23
+F. Performance front-end et optimisation ....................... p.24
+G. Stratégie de tests unitaires (Jasmine) ...................... p.25
+H. Industrialisation et déploiement front-end .................. p.26
+I. SEO Technique et Accessibilité Avancée (A11Y) ............... p.27
+4. BLOC 3 : DÉVELOPPER LE BACK-END (SERVICES ET PERSISTANCE) ....... p.28
+A. Architecture de persistence et modélisation SQL ............. p.28
+B. Logique métier Node.js et Éco-conception Back-end ........... p.29
+C. Système de paiement et stratégie de monétisation ............ p.30
+D. Développement d'API sécurisée et standardisée ............... p.31
+E. Automatisation des tests et assurance qualité ............... p.32
+F. Industrialisation back-end et CI/CD ......................... p.33
+G. Gestion des Migrations et Monitoring ........................ p.34
+5. JOURNAL DE BORD DÉTAILLÉ (60 JOURS D'IMMERSION) ................. p.36
+6. CONCLUSION GÉNÉRALE ET BILAN DU CANDIDAT ........................ p.42
+1
+1. INTRODUCTION GÉNÉRALE ET CONTEXTE DU PROJET
+A - Contexte du projet et objectif général
+Le présent dossier de validation constitue le support écrit officiel pour
+l'obtention du titre professionnel de Développeur Full Stack, inscrit au
+Répertoire National des Certifications Professionnelles au niveau 6. Ce document
+retrace l'intégralité du cycle de développement d'une application professionnelle
+nommée SkillTest, une plateforme SaaS conçue pour révolutionner l'évaluation
+technique des candidats dans le secteur du numérique. L'approche adoptée pour ce
+projet ne se limite pas à la simple production de code, mais englobe une réflexion
+stratégique sur l'architecture, la sécurité, l'accessibilité et la scalabilité d'une
+solution logicielle moderne.
+Dans un marché du travail en constante mutation, les entreprises font face à un
+défi majeur : la validation objective des compétences techniques de leurs futurs
+collaborateurs. Le projet SkillTest apporte une réponse concrète à ce besoin en
+proposant un environnement automatisé, fiable et sécurisé. L'objectif est de
+permettre aux recruteurs de gagner en efficience tout en offrant aux candidats une
+expérience utilisateur fluide et valorisante. Tout au long de ce dossier, nous
+démontrerons comment les contraintes métier ont été traduites en solutions
+techniques innovantes, en respectant les standards de l'industrie et les
+réglementations en vigueur.
+Le développement de cette plateforme a nécessité une immersion totale dans les
+différentes phases du cycle de vie d'un logiciel. De l'analyse initiale du besoin
+à la mise en production sur des infrastructures cloud, chaque étape a été
+documentée avec une rigueur méthodologique. Ce dossier est structuré de manière à
+mettre en lumière les compétences acquises dans les trois blocs fondamentaux du
+titre professionnel, illustrant ainsi une vision globale et maîtrisée du métier de
+développeur full stack au sein d'une organisation contemporaine. La réussite de
+ce projet repose sur une symbiose entre une expertise technique pointue et une
+compréhension fine des enjeux business du recrutement moderne.
+L'histoire de SkillTest commence par une observation simple du quotidien des
+recruteurs techniques. Ces derniers passent une part disproportionnée de leur
+temps à filtrer des candidats dont les compétences réelles ne correspondent pas à
+leurs affirmations sur les CV. Ce "bruit" dans le processus de recrutement génère
+des coûts importants et des frustrations tant pour l'entreprise que pour le
+candidat. SkillTest a donc été pensé comme un filtre intelligent, capable de
+fournir des données empiriques et indiscutables sur le niveau de maîtrise d'une
+technologie donnée. Ce document détaille comment j'ai transformé cette
+intention en une réalité logicielle complexe et performante.
+2
+B - Présentation de l’équipe
+ANOUAR Abdelmajid , 21 ans
+En tant que développeur solo sur le projet SkillTest , je me dois d’assumer chacun des rôles compris dans
+les contraintes de sa réalisation :
+Rôle Responsabilités
+Chef de projet -
+-
+-
+Analyse du cahier des charges et des
+besoins
+Planification du planning ( conception et
+livraison)
+Mise en place d’un suivi client-équipe
+Développeur back-end -
+-
+-
+Programmation de l’architecture serveur
+Mise en place de la base de données et
+administration de celle ci
+Implémentation des features
+Développeur front-end -
+-
+-
+Intégration des maquettes Figma
+Développement des composants Angular
+(UI/Logique)
+Optimisation de la performance (Lazy
+Loading)
+Designer UX/UI -
+-
+-
+Conception des maquettes
+Élaboration d’une ergonomie intuitive
+Garantie de l'accessibilité
+Testeur/Qualité -
+-
+-
+Tests techniques / unitaires / fonctionnels
+Détection et suivi des anomalies (bugs)
+Validation de la non-régression du code
+Conformité -
+-
+Attention au bon respect des normes
+RGPD
+Veille au respect des principes
+d’éco-conception
+3
+4
+BLOC 1 : CONCEVOIR ET MODÉLISER UNE APPLICATION
+5
+A. Note de cadrage et analyse du besoin client
+La phase de cadrage constitue la fondation de tout projet logiciel réussi. Pour
+SkillTest, l'analyse du besoin a débuté par une étude approfondie du marché du
+recrutement technique. j'ai constaté que les méthodes traditionnelles,
+souvent basées sur des entretiens verbaux ou des tests papier, manquaient
+cruellement d'objectivité et de traçabilité. Le projet vise donc à combler ce vide
+en fournissant une plateforme centralisée capable d'administrer des évaluations
+complexes de manière transparente. Cette analyse a permis de définir les piliers
+stratégiques de l'application : la fiabilité du moteur de correction, la
+protection contre la triche et l'extensivité des rapports statistiques fournis
+aux recruteurs.
+6
+Pour garantir la réussite du projet, j'ai formalisé des objectifs SMART,
+assurant un pilotage précis :
+Spécifique : Développer une plateforme de tests techniques avec correction automatique pour JS, Python
+et SQL.
+Mesurable : Supporter 50 utilisateurs simultanés sans latence et corriger les QCM en moins de 200ms.
+Atteignable : Périmètre délimité à 3 langages et 2 rôles (Candidat/Recruteur) pour tenir dans les 3 mois.
+Réaliste : Utilisation de technologies maîtrisées (Angular/Node) pour minimiser les risques
+d'apprentissage.
+Temporel : Version MVP livrable pour la soutenance du 29 Septembre 2025.
+L'analyse des besoins a montré que les différents acteurs ont des attentes à la fois distinctes et
+complémentaires. Les responsables des ressources humaines veulent avant tout un outil qui permette de
+réduire les coûts de recrutement. Les managers techniques, quant à eux, exigent une évaluation très
+précise des compétences techniques spécifiques, comme JavaScript ou SQL. Pour les candidats, le plus
+important est la clarté des consignes et le sentiment d'équité pendant le test. La note de cadrage a donc
+permis de concilier ces points de vue pour définir une orientation de produit cohérente, qui sert les
+intérêts économiques de l'entreprise cliente tout en se concentrant sur l'expérience de l'utilisateur final.
+7
+Sur le plan technique, j'ai défini une architecture simple mais efficace. J'ai choisi une application web de
+type Single Page Application pour le côté utilisateur et une API REST pour le serveur. Cela permet de bien
+séparer les deux parties et de faciliter la maintenance, ce qui est crucial pour un projet géré seul. J'ai
+gardé en tête l'idée que le site devait charger rapidement (moins de deux secondes) et être capable de
+gérer un bon nombre d'utilisateurs. Dès le départ, j'ai mis l'accent sur la sécurité, en prévoyant des
+protections contre les failles courantes comme les injections SQL ou le Cross-Site Scripting.
+Pour l'avenir, j'ai réfléchi à comment mon application, SkillTest, pourrait passer d'une utilisation pour une
+seule entreprise à un usage par plusieurs. J'ai anticipé ce besoin de "multi-tenant" pour ne pas me
+retrouver bloqué plus tard si le projet devait grandir. J'ai donc pensé à la structure des données pour isoler
+chaque client.
+Pour l'organisation, et comme je gère tout, la matrice RACI m'a surtout servi à clarifier mon rôle par
+rapport à mon tuteur. En gros, je suis responsable de tout le développement, et mon tuteur valide les
+grandes étapes techniques et fonctionnelles. J'ai aussi utilisé un outil simple, le diagramme "Bête à
+cornes", pour m'assurer que le produit correspondait bien au besoin de départ.
+Enfin, j'ai pris en compte l'aspect légal, surtout concernant les données des candidats. J'ai mis en place un
+protocole clair pour obtenir leur consentement, expliquer ce que je fais de leurs données et comment les
+scores seront calculés. C'est essentiel pour que l'outil soit fiable et respectueux des personnes. Cette
+première phase de cadrage a servi de feuille de route pour tout le développement.
+8
+B. Étude de faisabilité et analyse sectorielle
+L'étude de faisabilité de SkillTest montre que ce projet est viable et répond à un vrai besoin.
+Aujourd'hui, les outils de recrutement sont souvent trop généraux et peu efficaces pour évaluer les
+compétences techniques. SkillTest propose une solution concrète pour améliorer ce processus.
+Pour prouver la pertinence de cette proposition, j'ai analysé plusieurs points. Économiquement, le
+coût d'un mauvais recrutement est très élevé. SkillTest permet de réduire ce risque et de faire gagner du
+temps aux développeurs seniors en automatisant la première sélection. J'ai aussi veillé à utiliser une
+architecture technique légère (Node.js) pour limiter les coûts.
+Stratégiquement, SkillTest se veut un écosystème de certification, pas juste un simple test. La
+sécurité est ma priorité : le système de détection des tentatives de triche et le chiffrement des données
+(respect du RGPD) sont des arguments clés pour convaincre de futures entreprises clientes.
+L'expérience utilisateur est également essentielle. J'ai conçu une interface (Angular) pour que le
+candidat passe le test dans les meilleures conditions possibles. Un processus fluide donne une bonne
+image de l'entreprise.
+Enfin, le choix des technologies (Angular/Node.js/MySQL) est un choix pratique. Utiliser des outils
+Open Source réduit les coûts de licence et facilitera l'éventuel recrutement d'une équipe de maintenance
+plus tard. L'API (Swagger) assure que SkillTest pourra s'intégrer facilement aux systèmes RH existants.
+En résumé, SkillTest est un investissement judicieux qui peut être rentabilisé très rapidement. Ce
+projet montre que j'ai une vision complète des enjeux techniques et commerciaux.
+9
+J'ai analysé la faisabilité de mon projet sur deux points principaux : la technique et l'argent.
+1. Côté Argent et Compétition : J'ai regardé ce que faisaient les autres outils d'évaluation de compétences
+(leurs offres, comment ils gagnent de l'argent). J'ai compris ce qui est difficile pour se lancer sur ce marché
+(avoir des exercices de qualité, que les entreprises fassent confiance). J'ai surtout trouvé comment
+SkillTest peut être différent : une technologie d'évaluation qui s'adapte, une interface facile pour les
+recruteurs et la possibilité de s'intégrer facilement aux outils de recrutement. Ces points m'ont aidé à
+définir clairement SkillTest comme une solution très fiable pour évaluer les compétences techniques
+pointues, avec une meilleure expérience utilisateur. C'est en étant sûr de ce positionnement que j'ai pu
+valider l'intérêt de continuer.
+2. Côté Technique et Risques : J'ai réfléchi à l'architecture technique idéale pour que la plateforme soit
+solide, sécurisée et rapide, même avec beaucoup d'utilisateurs. J'ai choisi l'architecture qui permet de
+gérer une croissance rapide et de garantir que les données d'évaluation sont protégées. J'ai aussi listé les
+risques techniques (comment éviter la triche, la rapidité du système quand il y a beaucoup de monde, ne
+pas utiliser des technologies trop vieilles). Pour chaque risque important, j'ai prévu des solutions
+(chiffrement pour la sécurité, système adaptable à la charge, veille sur les nouvelles technologies).
+En résumé, ce travail a transformé mon idée en un projet concret, justifié économiquement et bien pensé
+techniquement. C'est la base pour commencer le développement.
+10
+C. Planification prévisionnelle et gestion des délais
+11
+Pour ce projet de fin d'études, j'ai organisé mon travail en me basant sur une structure simple mais claire.
+J'ai découpé le projet SkillTest en sept étapes principales avec des objectifs précis pour chacune. J'ai
+d'abord passé deux semaines sur la conception et la modélisation. Ensuite, le développement de l'API et
+de la base de données a été l'étape la plus longue, prenant trois semaines. Les étapes suivantes ont
+concerné la création de l'interface, l'ajout des services externes, et enfin une phase cruciale de tests avant
+la mise en ligne. Cette approche m'a permis d'avancer de manière progressive et de maîtriser l'ensemble
+du développement.
+Concernant le budget, bien qu'étant seul, j'ai dû estimer les coûts de l'infrastructure cloud nécessaire au
+projet (serveurs, bases de données, stockage). J'ai aussi intégré les frais liés aux licences logicielles
+spécifiques, aux certificats de sécurité SSL, et j'ai prévu une petite marge de sécurité de dix pour cent
+pour faire face à tout problème technique imprévu. Cette estimation, même simplifiée, m'a servi de
+feuille de route pour valider la faisabilité financière et m'assurer que les ressources étaient gérées de
+façon responsable.
+Pour suivre l'avancement, j'ai utilisé des outils de gestion de projet adaptés à ma situation d'étudiant
+pour avoir une vision en temps réel. J'ai estimé la difficulté de chaque tâche, ce qui m'a aidé à visualiser
+ma progression et à ajuster ma charge de travail chaque semaine. Cette méthode dynamique a été
+essentielle pour identifier rapidement les points de blocage, comme lors de la création du moteur de
+correction en temps réel, et pour m'assurer de respecter les délais. La planification n'a donc pas été un
+document fixe, mais plutôt mon outil principal pour mener le projet SkillTest du concept initial à sa
+version finale.
+12
+En complément de ma planification, j'ai mis en place une gestion des risques pour ce projet. Chaque
+risque identifié, que ce soit une difficulté technique (intégration d'un composant, par exemple) ou un
+imprévu dans mon planning, a été anticipé avec une stratégie d'atténuation. Par exemple, pour éviter un
+retard sur le front-end, j'ai démarré par les fonctionnalités les plus importantes, garantissant ainsi d'avoir
+toujours une version minimale utilisable. Cette approche m'a permis de garder le cap et de maintenir ma
+motivation tout au long des douze semaines de développement intense.
+J'ai aussi effectué un suivi budgétaire hebdomadaire. J'ai comparé le coût réel au coût prévu pour chaque
+phase. Cette analyse m'a montré où je pouvais optimiser les dépenses, notamment sur l'utilisation des
+services cloud. J'ai par exemple choisi des instances réservées au lieu de la consommation à la demande
+pour l'environnement de production, réduisant ainsi la facture. Cette rigueur budgétaire m'a encouragé à
+chercher les solutions les plus efficaces et à éviter toute complexité inutile, assurant un excellent rapport
+qualité-prix pour le développement final de SkillTest.
+13
+D. Gestion budgétaire et ressources projet
+S'agissant d'un projet individuel de fin d'études, la gestion budgétaire prend ici la forme d'une
+valorisation financière des ressources engagées. L'objectif est d'estimer le coût de production réel du
+logiciel Skill Test si celui-ci avait été développé dans un contexte commercial. Cette démarche démontre la
+conscience des enjeux économiques liés au développement logiciel.
+Tableau de valorisation du projet (Estimation coût marché) :
+Cette estimation met en évidence la valeur que j'ai créée, même si elle n'est pas directement financière.
+Bien qu'aucun budget de trésorerie réel n'ait été géré, ce projet représente un investissement conséquent
+en temps personnel. J'ai donc appliqué des méthodes de travail professionnelles pour garantir que cet
+effort apporte un résultat concret (retour sur investissement ou ROI).
+14
+E. Architecture logicielle et choix techniques
+Le choix de la stack technologique pour SkillTest a été guidé par des impératifs
+de robustesse, de scalabilité et de pérennité du code. Côté interface, le
+framework Angular a été préconisé pour sa structure imposée et sa gestion native
+du typage via TypeScript. Dans un contexte d'application d'entreprise complexe, la
+modularité d'Angular permet une meilleure organisation du code et facilite les
+tests unitaires. L'utilisation de l'API Signals, introduite dans les versions
+récentes, offre des performances de rendu exceptionnelles, essentielles pour une
+interface de test où chaque milliseconde de latence peut impacter la concentration
+du candidat.
+J'ai validé ces choix via des Tableaux Comparatifs rigoureux (ex: Angular vs React vs Vue). Angular l'a
+emporté (Score 85/100) grâce à son écosystème (Router, HTTP , Forms) qui évite la fragmentation des
+dépendances, contrairement à React qui nécessitait trop d'assemblage manuel pour ce délai court.
+j'ai également justifié ce choix par la richesse de l'écosystème Angular Material, qui garantit une
+cohérence graphique professionnelle
+et une accessibilité native exemplaire.
+Pour le back-end, l'environnement Node.js couplé au framework Express a été retenu
+pour sa capacité à gérer un grand nombre d'opérations d'entrée/sortie asynchrones.
+Cette architecture non-bloquante est particulièrement adaptée au moteur de
+SkillTest, qui doit traiter en permanence des flux de données provenant des
+chronomètres et des soumissions de réponses. L'utilisation de TypeScript côté
+serveur permet également de partager les modèles de données avec le front-end,
+réduisant ainsi les risques d'incohérence entre les deux couches. En matière de
+persistance, le choix de MySQL a été dicté par la nature rigide et relationnelle
+des données traitées, garantissant une intégrité parfaite des résultats des
+candidats et permettant des requêtes d'analyse complexes pour les rapports
+statistiques.
+15
+L'application a été conçue selon une structure claire (un modèle N-tiers), séparant la partie visible
+(présentation), le cœur du fonctionnement (logique métier) et l'accès aux données. J'ai choisi cette
+approche pour que le projet puisse évoluer facilement, par exemple si j'ajoute plus tard un module
+d'intelligence artificielle pour corriger automatiquement le code. Pour l'hébergement, j'ai utilisé les
+services cloud d'Amazon Web Services, ce qui m'a permis de profiter de leur puissance sans avoir à gérer
+l'entretien des serveurs. Cette architecture moderne assure que SkillTest pourra grandir si le besoin s'en
+fait sentir.
+J'ai aussi réfléchi à la manière de gérer les informations dans l'application. Plutôt que d'utiliser des outils
+complexes, j'ai opté pour des services Angular simples avec RxJS (BehaviorSubjects). Cela permet de
+garder tous les éléments synchronisés sans alourdir le projet. Pour les mises à jour en direct, par exemple
+pour montrer immédiatement au recruteur où en est le candidat, j'ai utilisé Socket.io. C'est essentiel pour
+le côté dynamique de la plateforme.
+Enfin, j'ai intégré les tests dès le début. J'ai mis en place une stratégie de test équilibrée : beaucoup de
+tests unitaires (la base), des tests d'intégration, et quelques tests de bout en bout avec Cypress pour
+vérifier le fonctionnement global. Cette approche assure que chaque partie du projet est vérifiée
+individuellement avant d'être mise dans l'ensemble. Les choix techniques allaient au-delà des langages de
+programmation, ils couvraient toute la méthode de travail pour garantir une bonne qualité du logiciel.
+16
+F. Virtualisation et infrastructure Docker
+Pour rendre le projet SkillTest facile à installer et à utiliser, j'ai tout automatisé. J'ai utilisé Docker pour
+créer un environnement virtuel qui est le même partout (sur mon PC, pour les tests, en production). Ça
+évite le fameux problème où ça marche chez moi mais pas ailleurs. Cet environnement est fait de trois
+parties isolées : une base de données MySQL, le serveur API en Node.js et un serveur Nginx pour afficher
+l'application Angular. Cette séparation me permet de modifier une partie sans tout casser.
+Pour l'installation, j'ai fait au plus simple. Une fois le code récupéré, une seule commande lance tout : elle
+télécharge ce qu'il faut, compile le code et prépare la base de données. J'ai aussi mis des outils pour
+vérifier l'état des conteneurs et repérer les problèmes rapidement. Cette organisation rend le
+développement plus sûr et simple, même si je travaille seul.
+Pour les mises en ligne, j'ai mis en place un système de déploiement automatique. Dès qu'une nouvelle
+fonctionnalité est prête, un processus crée une nouvelle version, lance tous les tests pour vérifier que rien
+n'a cassé, et met le tout en ligne sur le serveur. Ce processus automatique réduit les erreurs et permet de
+faire des mises à jour régulières sans stress. En bref, Docker est la clé pour avoir un projet SkillTest stable
+et facile à faire évoluer rapidement.
+17
+En approfondissant la dimension réseau de mon virtualisation, j'ai
+configuré un réseau privé virtuel interne à Docker pour que mes conteneurs puissent
+communiquer entre eux sans exposer leurs ports inutilement sur l'hôte. Seul le
+service Nginx est accessible depuis l'extérieur, jouant le rôle de rempart
+sécuritaire. Cette micro-architecture réseau renforce la protection de mes données
+et de mon logique métier. j'ai également mis en place une gestion des
+secrets via des fichiers d'environnement injectés dynamiquement dans les
+conteneurs lors du démarrage, évitant ainsi de laisser traîner des mots de passe
+en clair dans le code source ou dans les images Docker elles-mêmes.
+Enfin, la stratégie de sauvegarde a été automatisée au niveau des volumes Docker.
+Un script planifié réalise quotidiennement un dump de la base de données MySQL et
+une archive des fichiers stockés, les déportant sur un stockage sécurisé hors site.
+Cette procédure de secours est testée mensuellement pour s'assurer de sa fiabilité
+effective. En traitant l'infrastructure comme du code, j'ai fait passer
+SkillTest d'un simple projet de démonstration à une plateforme industrielle prête
+à l'emploi. La mise en œuvre et la virtualisation ne sont ici que la face visible
+d'une rigueur opérationnelle indispensable pour tout développeur souhaitant
+assumer la responsabilité d'une application en production.
+18
+G. Méthodologie Agile et kanban
+Au début de chaque cycle, je définissais les objectifs principaux et les tâches prioritaires à réaliser. Cette
+approche itérative s'est révélée essentielle pour maintenir ma flexibilité face aux imprévus, comme l'ajout
+de la génération de certificats PDF en cours de route. Ma capacité d'adaptation a été un facteur clé pour la
+réussite du projet.
+Pour le suivi quotidien, j'utilisais un tableau de bord personnel, souvent numérique, découpé en étapes
+claires : à faire, en cours, à vérifier/tester et terminé. Cette visualisation m'aidait à mesurer l'avancement
+et à identifier immédiatement les points qui nécessitaient plus d'attention. À la fin de chaque itération, je
+réalisais une démonstration du travail accompli et une phase de rétrospective personnelle pour analyser
+ce qui avait bien fonctionné et ajuster ma méthode de travail pour le cycle suivant.
+J'ai défini le "Terminé" avec une exigence de qualité stricte. Une fonctionnalité n'était considérée comme
+achevée qu'après avoir été vérifiée minutieusement (auto-revue critique du code), que les tests unitaires
+couvraient les cas critiques et que la documentation associée était mise à jour. Cette discipline a permis
+de garantir la qualité et la robustesse de la plateforme SkillTest tout au long du projet, en évitant
+l'accumulation de dette technique. J'ai ainsi réussi à maintenir un rythme de production soutenu tout en
+assurant la solidité technique de mon projet de fin d'études.
+19
+Pour avancer efficacement dans mon projet, j'ai mis en place des sessions régulières de
+planification. J'y détaillais les prochaines fonctionnalités à développer, les découpais en étapes précises et
+estimais le temps nécessaire. Cette anticipation me permettait de prévoir les difficultés techniques et de
+ne jamais être pris de court pour les tâches suivantes. Cela a réduit le stress et a assuré un meilleur
+déroulement de mon travail. J'ai aussi suivi ma propre vélocité pour ajuster mes estimations et avoir une
+idée assez précise de la date de finalisation des modules importants, ce qui était utile pour communiquer
+mon avancement.
+Enfin, je n'ai pas négligé l'aspect humain dans mon organisation. J'ai pris le temps de faire un bilan
+régulier de mon travail, comme une rétrospective personnelle, pour identifier ce qui fonctionnait bien et
+mes points de frustration. C'est grâce à ces réflexions que j'ai pu améliorer ma méthode de travail, par
+exemple en m'accordant des moments de concentration sans aucune interruption. Adopter une approche
+agile pour ce projet n'a pas été une simple contrainte, mais une manière d'optimiser mon efficacité, de
+garantir un travail de qualité et de progresser en tant que développeur.
+20
+H. Suivi d'activité et reporting hebdomadaire
+Pour garantir une bonne visibilité sur l'avancement de mon projet SkillTest et pour structurer ma
+démarche, j'ai mis en place un suivi d'activité hebdomadaire. Ce document me sert de bilan pour la
+semaine écoulée.
+Je commence par un récapitulatif des points clés, comme les fonctionnalités que j'ai terminées ou les
+réussites techniques majeures. Ensuite, je détaille les tâches que j'ai accomplies en les comparant à ce que
+j'avais prévu de faire. Cette étape est cruciale pour m'assurer que je suis dans les temps et pour identifier
+rapidement si je prends du retard.
+Mon rapport inclut aussi une analyse des problèmes que j'ai rencontrés (un bug complexe, une difficulté
+d'intégration, etc.) et les solutions que j'y ai apportées. Documenter ces obstacles et leurs résolutions me
+permet de capitaliser sur l'expérience et de ne pas refaire les mêmes erreurs. J'y intègre également
+quelques indicateurs simples pour mesurer l'état de santé de mon projet, comme l'évolution du nombre
+de bugs ouverts ou le respect du planning initial. Cela me donne une base objective pour faire le point.
+Enfin, je prépare la semaine suivante en listant les objectifs que je me fixe. Ce suivi régulier n'est pas une
+simple formalité ; c'est un outil essentiel pour bien gérer mon projet de fin d'études, m'assurer que
+j'avance efficacement et que tout est prêt pour la soutenance.
+J'ai rendu mon reporting plus clair en y ajoutant des captures d'écran des nouveautés et des extraits de
+logs pour montrer comment j'ai résolu les problèmes. Cela rend le document plus compréhensible, même
+pour ceux qui ne sont pas techniques. J'ai aussi mis en place un système de couleurs (Vert, Orange,
+Rouge) pour signaler rapidement si le planning est en danger. Cette transparence est essentielle pour que
+mon encadrant ait confiance dans l'avancement du projet.
+Je stocke tous ces comptes rendus sur un espace partagé. C'est une façon simple de garder une trace de
+l'histoire du projet SkillTest, des choix techniques faits et de l'évolution de la vision du produit. Mon
+rapport hebdomadaire sert donc de mémoire au projet et permet de vérifier que tout reste cohérent sur
+le long terme. En tant que développeur full stack, savoir bien expliquer mon travail est aussi crucial que
+de savoir coder, et ce modèle de compte rendu le prouve.
+21
+I. Conception UX/UI et maquettage interactif
+22
+23
+24
+J'ai commencé la conception de l'expérience utilisateur de SkillTest par des maquettes simples, afin de
+bien définir la navigation avant de m'occuper de l'apparence. J'ai privilégié l'approche "Mobile First" pour
+que l'application soit accessible sur n'importe quel appareil. J'ai ensuite testé ces maquettes et je les ai
+simplifiées, notamment l'interface de passage de test, pour que le candidat puisse se concentrer
+uniquement sur les questions. Cette simplicité est l'élément clé du design de SkillTest.
+Pour l'aspect graphique, j'ai créé une charte avec du bleu foncé pour la confiance, du gris clair pour la
+structure et des touches de couleurs vives pour les actions. J'ai utilisé Figma pour construire une
+bibliothèque de composants (boutons, champs, barres de progression, etc.). Cela garantit une cohérence
+visuelle sur toutes les pages et facilite le développement. Chaque composant a été pensé pour afficher
+clairement les états (erreur, chargement, succès).
+L'accessibilité numérique était essentielle. J'ai veillé à utiliser des contrastes de couleurs qui respectent
+les normes et à permettre une navigation complète au clavier. J'ai aussi ajouté des descriptions pour les
+lecteurs d'écran. Mon travail de conception a transformé les idées de départ en une plateforme concrète,
+intuitive et agréable à utiliser, ce qui est une base solide pour la réussite du projet.
+J'ai aussi beaucoup réfléchi au choix des mots dans l'application ("Micro-copywriting"). Chaque
+message d'erreur, chaque bouton et chaque petite info a été pensé pour être le plus clair possible et
+éviter de stresser l'utilisateur. J'ai laissé de côté le jargon technique compliqué pour utiliser un langage
+simple et direct. Par exemple, au lieu de mettre un message comme "Erreur de validation 403", j'ai préféré
+afficher "Action non autorisée : veuillez contacter votre administrateur". Ce soin apporté aux textes
+permet à l'utilisateur de se sentir en contrôle et de rester concentré, surtout pendant les tests
+chronométrés.
+Pour terminer le travail sur l'expérience utilisateur (UX), j'ai créé des maquettes interactives cliquables
+pour simuler l'application avant de commencer à coder. J'ai présenté ces prototypes à mes professeurs et
+à quelques testeurs. Leurs retours ont été très importants pour ajuster l'emplacement de certains
+boutons essentiels, comme le "Terminer le test". Cette étape de test réel m'a permis de valider mes choix
+d'ergonomie et de préparer la phase de développement. L'UX de SkillTest n'est donc pas le fruit du
+hasard, mais le résultat d'une démarche simple et logique pour que l'application soit la plus facile et
+agréable à utiliser.
+25
+J. Modélisation UML et schéma de données
+Diagramme de Séquence - Protocole d’authentification sécurisé et génération du Token JWT
+La sécurité étant une priorité absolue, j'ai modélisé le protocole d'accès à la plateforme via ce diagramme
+de séquence dédié. Il décrit le processus de vérification des identifiants par le service d'authentification,
+la comparaison sécurisée des hashs en base de données, et la génération finale du Token JWT. J'ai porté
+une attention particulière à la gestion des échecs de connexion pour protéger le système contre les accès
+non autorisés. Ce schéma sert de base technique à l'implémentation de mes intercepteurs HTTP , assurant
+que seules les requêtes munies d'un jeton valide peuvent accéder aux ressources protégées du serveur.
+26
+Diagramme de Séquence - Cinématique technique et interactions entre les services lors du passage d'un
+test
+Ce diagramme détaille la cinématique technique lors de l'interaction la plus complexe de
+l'application. J'ai modélisé les échanges synchrones entre l'interface utilisateur et les services internes,
+notamment le rôle crucial du moteur d'adaptation (AdaptiveEngine). Ce schéma illustre comment les
+questions sont récupérées, présentées au candidat, puis validées avant l'enregistrement final en base de
+données. En visualisant ces interactions, j'ai pu optimiser les appels API et m'assurer que l'état du test est
+correctement préservé à chaque étape, garantissant une expérience utilisateur sans faille.
+27
+Diagramme de Cas d’Utilisation UML - Définition des acteurs et des fonctionnalités métiers de SkillTest
+Ce diagramme constitue le point de départ de ma réflexion fonctionnelle en identifiant les quatre acteurs
+majeurs du système. J'ai modélisé les interactions spécifiques de l'Administrateur pour la gestion des
+comptes, de l'Évaluateur pour la création des tests, et du Candidat pour le passage des évaluations. Le
+"Système" intervient comme un acteur automatisé gérant la persistance des données et l'algorithme de
+notation. Cette vue d'ensemble m'a permis de définir un périmètre clair pour mon MVP , garantissant que
+chaque besoin métier est traduit par une fonctionnalité logicielle précise et sécurisée.
+28
+Diagramme de classes UML - Architecture des objets métier et services logiques de SkillTest
+La structure statique de SkillTest est ici exposée, montrant la transition entre mes besoins fonctionnels et
+l'architecture logicielle. J'ai conçu un modèle de données robuste où les entités métier comme les tests,
+les questions et les résultats sont liées par des relations normalisées (One-to-Many et Many-to-Many).
+Au-delà des données, j'ai intégré la couche de services (AuthService, TestService) pour respecter le
+principe de séparation des responsabilités. Cette modélisation garantit une évolutivité du code, me
+permettant d'ajouter de nouveaux types de tests ou de critères d'évaluation sans déstabiliser
+l'architecture existante.
+29
+Diagrammes d'activités - Modélisation des processus métier (Passage et Création de tests)
+Il m'a permis de définir précisément les étapes de l'algorithme de notation et de m'assurer qu'aucune
+étape critique (comme la vérification des prérequis ou la validation du test) n'était oubliée lors du
+développement.
+Grâce à cette modélisation des flux, j'ai pu cartographier les parcours utilisateurs de bout en bout pour les
+deux fonctionnalités critiques de la plateforme. Pour le candidat, le flux détaille les étapes depuis
+l'authentification jusqu'à la génération du rapport final, incluant la validation en temps réel des réponses.
+Pour le recruteur, j'ai structuré le processus de création de test pour assurer une configuration fluide du
+barème et des questions. Ces schémas ont été indispensables pour anticiper les structures de contrôle et
+les branchements logiques que j'ai ensuite implémentés dans mon code backend.
+30
+J'ai conçu l'architecture de SkillTest en utilisant la modélisation UML pour bien définir comment le
+système fonctionne en interne. J'ai d'abord créé un diagramme de classes pour identifier les éléments clés
+comme le Test, la Question, le Candidat et la Session, et comment ils s'articulent entre eux. Par exemple,
+chaque question est directement liée à un seul test, assurant la cohérence des données. Cette étape a
+permis de poser les bases d'un code fiable.
+J'ai ensuite modélisé les scénarios importants avec des diagrammes de séquence, notamment
+l'authentification et l'enregistrement des réponses. Cela m'a permis de visualiser les échanges entre les
+différentes parties (client, serveur, base de données) et d'identifier les points à améliorer. J'ai ainsi
+optimisé certains processus, par exemple en mettant en place un système de cache pour les tests les plus
+consultés. La modélisation UML a été un outil crucial pour lier mes objectifs initiaux à la réalisation
+technique du projet.
+Enfin, j'ai accordé une attention particulière à la conception de la base de données pour garantir de
+bonnes performances. J'ai choisi un schéma clair et organisé (en troisième forme normale) pour éviter les
+redondances et maintenir l'intégrité des informations. J'ai ajouté des index sur les champs les plus utilisés
+pour accélérer les recherches (comme les identifiants). J'ai aussi documenté toutes les tables et colonnes
+dans un dictionnaire de données, ce qui est indispensable pour la gestion future du projet. Ce travail
+structurel assure que SkillTest pourra fonctionner efficacement et supporter une éventuelle croissance.
+31
+Pour aller plus loin dans la conception, j'ai aussi créé un diagramme de déploiement qui montre
+l'architecture physique de mon application sur les serveurs AWS. Ce schéma explique comment les
+différents services sont répartis dans des conteneurs Docker et comment les bases de données (RDS) sont
+configurées, y compris les règles de pare-feu et l'utilisation de répartiteurs de charge. Cette vue technique
+concrète a servi de guide pour la mise en place de l'infrastructure. J'ai également documenté les
+interfaces de mes APIs avec des diagrammes de communication, spécifiant exactement le format des
+données JSON attendues et renvoyées par chaque point d'accès.
+Cette phase de conception rigoureuse m'a permis d'éviter des problèmes d'architecture qui auraient été
+longs et difficiles à régler plus tard. En ayant une idée claire de toutes les parties du système, j'ai pu
+avancer de manière fluide sur le développement (front-end et back-end), les échanges entre les deux
+étant définis dès le départ. Ce dossier de conception n'est donc pas qu'un document théorique pour le
+jury, mais le véritable plan technique du projet SkillTest, garantissant sa cohérence et simplifiant sa
+maintenance. J'ai trouvé que l'utilisation de la modélisation UML était cruciale pour la réussite de mon
+projet.
+32
+K. Conformité RGPD et sécurité informatique
+CNIL : Respect des directives de la Commission Nationale de
+l’Informatique et des Libertés.
+Je respecte les règles de la CNIL pour assurer une utilisation responsable des
+données :
+● Transparence : Les utilisateurs savent quelles infos sont collectées et
+pourquoi.
+● Sécurité : Les données restent protégées et ne sont pas partagées sans
+accord.
+● Droits : Chacun peut accéder, modifier ou supprimer ses infos facilement.
+L’objectif est simple : respecter la vie privée et suivre les bonnes pratiques de la
+CNIL.
+ISO : Conformité aux normes ISO pertinentes pour le projet.
+Je m’assure que le projet suit les normes ISO adaptées :
+● Qualité : Processus bien définis pour un travail efficace.
+● Sécurité : Protection des données et des systèmes.
+● Fiabilité : Des standards reconnus pour garantir un bon fonctionnement.
+L’idée, c’est de respecter les meilleures pratiques pour un projet solide et sécurisé.
+33
+Pour la sécurité, j'ai mis en place le principe du moindre privilège : chaque type d'utilisateur (admin,
+recruteur, candidat) n'a accès qu'aux fonctionnalités strictement nécessaires. Les mots de passe sont
+sécurisés grâce à l'algorithme Bcrypt et un sel fort pour empêcher le cassage par force brute. J'ai aussi un
+système qui enregistre les actions critiques pour détecter rapidement toute activité suspecte. Cette
+démarche assure la conformité aux réglementations et protège efficacement les données de SkillTest.
+J'ai anticipé le risque de fuite de données en élaborant une procédure de gestion de crise. Ce plan définit
+comment isoler l'incident, évaluer l'impact et informer rapidement la CNIL et les utilisateurs, dans les
+délais légaux. La sécurité est pour moi un travail continu. J'utilise des outils automatisés pour réaliser des
+tests de pénétration réguliers sur mes dépendances logicielles et j'applique les correctifs de sécurité
+immédiatement dès qu'ils sont disponibles.
+Même en étant seul, j'ai intégré la sécurité dans mon processus de développement. J'ai appliqué les
+bonnes pratiques de codage sécurisé. Pour les parties sensibles du projet (comme le paiement ou les
+résultats), j'ai fait des revues de code très spécifiques sur la sécurité. Avoir cette rigueur dans le
+développement est la meilleure façon d'éviter les erreurs. Au final, SkillTest est une plateforme qui
+respecte la vie privée et est suffisamment robuste pour répondre aux exigences de sécurité les plus
+élevées.
+34
+L. Veille technologique et innovation logicielle
+Pour SkillTest, je me suis assuré de rester à jour avec les technologies les plus récentes et les bonnes
+pratiques de développement. Voici un aperçu de ce que j'ai pris en compte :
+Framework Front-End
+Tout au long de ce projet, j'ai fait pas mal de veille technologique, ce qui m’a permis de choisir les bonnes
+technologies pour développer SkillTest. Côté front-end, j'avais plusieurs options (comme React ou Vue),
+mais celle qui m’a vraiment séduit, c’est Angular 18. Ce qui m'a convaincu, c'est l'introduction des Signals.
+En gros, cela permet une gestion de la réactivité beaucoup plus fine et performante que l'ancien système,
+car l'application sait exactement quel composant mettre à jour sans scruter toute la page. Angular 18
+apporte aussi les Standalone Components, qui simplifient énormément la structure du code en
+supprimant les modules lourds. C'est idéal pour garantir une plateforme fluide, surtout lors du passage
+des tests où chaque milliseconde compte.
+Voici quelques liens vers les ressources qui m’ont aidé à choisir Angular 18 :
+Documentation officielle d'Angular (Signals) : La source indispensable pour comprendre comment les
+Signals révolutionnent la performance en remplaçant progressivement Zone.js.
+Angular.dev - Guide des Signals
+Blog Angular - Nouveautés de la version 18 : Un article détaillé sur les dernières avancées, notamment
+l'hydratation partielle et l'amélioration du rendu côté serveur (SSR).
+Angular Blog - Version 18 Release
+Framework Back-End
+Tout comme pour le front-end, j’ai fait une veille approfondie pour choisir le bon environnement
+back-end. Après avoir comparé plusieurs solutions, j'ai choisi Node.js avec Express, le tout typé avec
+TypeScript.
+Ce qui m'a séduit, c'est sa rapidité d'exécution et son architecture non-bloquante, parfaite pour gérer
+plusieurs candidats en même temps. Pour la gestion de la base de données, j'ai découvert l'ORM
+Sequelize.
+Cela facilite énormément la vie en évitant d'écrire du SQL brut, tout en protégeant nativement
+l'application contre les injections SQL.
+L'écosystème NPM me permet aussi d'intégrer facilement des outils de sécurité comme Helmet ou
+Bcrypt, garantissant que SkillTest soit une plateforme robuste et prête pour la production.
+Au-delà de la simple surveillance, la veille technologique chez SkillTest est un moteur de préconisations
+techniques éclairées, fondées sur une analyse critique constante des solutions existantes.
+35
+Analyse Critique et Préconisations Techniques
+Nous ne nous contentons pas d'adopter de nouvelles technologies, nous les passons au crible de
+l'utilité, de la performance et de la pérennité. L'adoption des Standalone Components en Angular
+n'était pas seulement une simplification architecturale ; c'était une préconisation visant à réduire
+la taille du bundle initial et à améliorer significativement le Time to Interactive (TTI), impactant
+directement l'expérience utilisateur et l'efficacité des tests. De même, l'interrogation constante sur
+la pertinence d'une base de données relationnelle face à des architectures mesQL pour certaines
+micro-parties du projet est un débat permanent, menant à des solutions hybrides et optimisées,
+par exemple en utilisant Redis pour le cache des sessions utilisateur pour des gains de latence
+massifs.
+Responsabilité Écologique et Accessibilité
+mon engagement ne s'arrête pas à la technique pure. Il englobe des dimensions cruciales comme la
+responsabilité environnementale et l'accessibilité numérique.
+1. Écologie Numérique et Consommation Énergétique : La performance est intrinsèquement liée à
+l'empreinte carbone. Un code plus efficace consomme moins de ressources serveur. En plus de
+l'optimisation back-end, j'ai intégré un Mode Sombre (Dark Mode) à l'interface utilisateur. Cette
+fonctionnalité n'est pas seulement esthétique ; elle permet une réduction significative de la
+consommation d'énergie sur les écrans OLED et AMOLED, contribuant à mon objectif de sobriété
+numérique. De plus, mes efforts d'optimisation des requêtes API visent à minimiser les transferts de
+données inutiles.
+2. Accessibilité (RGAA/WCAG) : j'ai intégré le Référentiel Général d'Amélioration de l'Accessibilité (RGAA) et
+les Web Content Accessibility Guidelines (WCAG) comme un critère non-négociable de mon revue de
+code. mon veille inclut les meilleures pratiques pour les utilisateurs en situation de handicap. Cela se
+traduit par :
+○
+Un soin particulier porté au contraste des couleurs et à la lisibilité des polices.
+○
+L'implémentation rigoureuse des attributs ARIA et de la navigation au clavier pour les lecteurs
+d'écran.
+○
+La garantie que l'ensemble du parcours utilisateur dans l'interface de test soit fonctionnel sans
+○
+l'usage de la souris.
+36
+Interrogation Stratégique
+Cette veille multidimensionnelle nous pousse à des interrogations stratégiques continues :
+Comment l'évolution des réglementations sur l'IA (IA Act) doit-elle redessiner mon feuille de route
+produit ? Quelle est la balance optimale entre l'adoption d'un nouveau framework prometteur et le
+coût de la dette technique qu'il pourrait générer ? C'est en posant ces questions et en y répondant
+avec méthode et preuve par l'expérimentation que SkillTest assure non seulement sa modernité
+technique, mais aussi sa pertinence éthique et sociétale à long terme.
+37
+M. Analyse des risques (Matrice)
+Au-delà de la conformité RGPD, une analyse globale des risques projet a été menée.
+j'ai classé les risques par criticité (Impact x Probabilité) :
+Cette matrice proactive prouve une capacité à anticiper les problèmes plutôt qu'à les subir.
+38
+BLOC 2 : DÉVELOPPER L'INTERFACE UTILISATEUR (FRONT-END)
+39
+A. Intégration visuelle et Design System
+J'ai conçu et développé l'interface utilisateur de SkillTest en mettant l'accent sur la simplicité d'utilisation.
+Pour le style, j'ai utilisé le framework CSS Tailwind, ce qui m'a permis d'avoir un design cohérent qui se
+charge très vite, car seuls les styles nécessaires sont inclus. La mise en page est complètement flexible et
+s'adapte parfaitement à tous les écrans, du smartphone au grand écran de bureau, même pour les
+tableaux de bord complexes.
+Dès le début, j'ai fait attention à l'accessibilité. J'ai suivi les règles du WCAG en utilisant les bonnes balises
+HTML (sémantiques) pour que les lecteurs d'écran puissent bien comprendre la structure, ce qui est
+crucial pour les utilisateurs malvoyants. Par exemple, j'ai mis des descriptions claires sur chaque bouton et
+j'ai veillé aux contrastes de couleurs pour une bonne lisibilité, même pour ceux qui ont des problèmes de
+vision des couleurs.
+Pour rendre l'expérience utilisateur plus agréable, j'ai ajouté de petites animations discrètes pour guider
+les utilisateurs, par exemple lors du passage d'une question à l'autre ou après l'enregistrement d'une
+réponse, ce qui donne une impression de fluidité. J'ai aussi utilisé des "Skeleton Screens" (écrans
+squelettes) pendant le chargement des données, ce qui rend l'attente moins frustrante et l'interface plus
+dynamique.
+En tant que développeur front-end, j'ai aussi dû gérer des aspects techniques comme l'optimisation des
+performances. J'ai été très attentif à la gestion de la mémoire, notamment en m'assurant que les
+composants étaient bien détruits pour éviter les ralentissements sur le long terme. J'ai régulièrement
+utilisé l'outil Axe-DevTools pour vérifier que l'interface restait conforme aux normes d'accessibilité tout au
+long du développement, garantissant ainsi une bonne qualité technique et visuelle.
+40
+La compatibilité navigateurs est assurée par l'utilisation d'outils standards (Browserslist, Polyfills
+automatiques) qui garantissent le support des deux dernières versions de Chrome, Firefox, Safari et
+Edge. J'ai veillé à n'utiliser que des propriétés CSS bien établies pour un affichage identique partout.
+Pour le multilingue, la conception visuelle a été pensée pour être flexible. Les architectures CSS
+utilisées peuvent s'adapter à des textes de longueurs très différentes, ce qui est crucial pour les langues
+comme l'allemand ou l'espagnol qui sont plus "expansives"
+. Cela permet d'envisager un déploiement
+international de SkillTest sans devoir tout refaire graphiquement. En résumé, le design et l'accessibilité
+chez SkillTest combinent esthétique, rigueur technique et une approche responsable.
+41
+I. SEO Technique et Accessibilité Avancée (A11Y)
+Au-delà du design, j'ai implémenté une véritable stratégie SEO et Accessibilité :
+1. Référencement (SEO) : Utilisation du Server-Side Rendering (SSR) partiel pour garantir l'indexation par
+les robots Google. Balisage sémantique strict (Title, Meta Description dynamiques) et optimisation du
+fichier `robots.txt`. Score Lighthouse SEO visé : 95/100.
+2. Accessibilité (A11Y - WCAG) : Intégration complète des rôles ARIA pour la compatibilité avec les
+lecteurs d'écran (ex: NVDA). Gestion du focus clavier pour naviguer sans souris. Vérification des rations de
+contraste (min 4.5:1) pour les daltoniens.
+Cette démarche assure que SkillTest est non seulement visible sur le web, mais utilisable par tous les
+profils de candidats.
+42
+Optimisation SEO
+43
+B. Développement des composants avec Angular
+44
+J'ai conçu l'interface de SkillTest en utilisant Angular et la librairie RxJS pour gérer efficacement les
+données qui changent souvent, comme le chronomètre qui doit être synchronisé avec le serveur. J'utilise
+des "Observables" pour surveiller les informations et mettre à jour l'écran automatiquement. Pour éviter
+que tout ne devienne un fouillis, j'ai centralisé la gestion des données importantes dans des services, ce
+qui rend le code plus propre.
+L'utilisation de TypeScript était essentielle pour éviter les erreurs. En définissant clairement le format des
+données qui circulent entre le serveur et l'application (grâce à des "interfaces"), je m'assure que tout
+s'affiche correctement, réduisant ainsi les bugs. Cela facilite aussi l'écriture du code grâce à
+l'autocomplétion.
+Dans les dernières versions d'Angular que j'ai utilisées, j'ai pu intégrer une nouvelle technique appelée
+"Signals". Cette méthode permet de ne mettre à jour que les éléments de l'écran qui ont vraiment
+changé. Pour SkillTest, où l'écran se rafraîchit souvent pendant un test, cela rend l'application beaucoup
+plus rapide et fluide pour l'utilisateur, tout en consommant moins de ressources sur son ordinateur.
+45
+46
+Pour que l'application reste utilisable même sans connexion internet, j'ai mis en place des mécanismes de
+sécurité dans mon code Angular, notamment avec les fonctions retry ou catchError d'RxJS. Si la
+connexion est perdue, l'application essaie de se reconnecter automatiquement ou affiche un message
+pour indiquer un mode hors ligne. C'était important pour ce projet d'évaluation, car une erreur technique
+ne doit pas fausser les résultats. J'ai réfléchi à tous les scénarios possibles pour sécuriser l'échange des
+données.
+Enfin, j'ai utilisé l'injection de dépendances d'Angular pour pouvoir tester facilement mon interface. Cela
+m'a permis de simuler les données du serveur (utiliser des "Mocks") pour travailler sur l'interface sans que
+le back-end soit forcément prêt. Cette façon de faire, inspirée des bonnes pratiques d'ingénierie logicielle,
+m'a fait gagner beaucoup de temps pendant le développement du prototype.
+47
+C. Gestion de l'état asynchrone (Signals/RxJS)
+La gestion de l'état global de SkillTest est orchestrée par une combinaison de
+services Angular et de signaux (Signals), permettant une réactivité fine sans
+complexité excessive. J'utilise RxJS pour les flux de données asynchrones
+complexes, comme le flux des questions lors d'un test, tandis que les signaux
+gèrent l'état local et partagé des composants de manière synchrone et ultra-
+performante.
+D. Communication API et services de données
+La communication entre le front-end Angular et l'API Node.js de SkillTest est
+orchestrée par un service HTTP centralisé, utilisant des intercepteurs pour
+automatiser les tâches répétitives et sécuriser tous les échanges. À chaque
+requête sortante, un intercepteur injecte automatiquement le jeton JSON Web de
+l'utilisateur dans les en-têtes d'autorisation, garantissant ainsi que seules
+les demandes authentifiées parviennent au serveur. En retour, un autre
+intercepteur traite globalement les erreurs potentielles, comme une expiration
+de session ou un refus d'accès, et redirige l'utilisateur vers la page de
+connexion de manière fluide.
+48
+J'ai mis en place un système de sécurité pour les évaluations. Côté client (Angular), je détecte si
+l'utilisateur change de fenêtre ou essaie d'ouvrir les outils de développement et je le signale tout de suite
+au serveur. Les réponses aux questions sont envoyées de manière sécurisée et décalée pour éviter que le
+candidat ne voie les bonnes réponses en regardant le trafic réseau.
+J'ai aussi optimisé les échanges pour que l'application soit rapide. J'ai utilisé des techniques de mise en
+cache et de chargement différé. Pour les pages d'administration, les grosses quantités de données pour
+les graphiques sont chargées petit à petit pour ne pas ralentir le navigateur. J'utilise la compression Gzip,
+ce qui réduit la taille des données échangées et accélère l'application, même avec une mauvaise
+connexion. J'ai fait de la communication client-serveur une priorité pour que SkillTest soit à la fois sûr et
+réactif.
+49
+J'ai également sécurisé l'interface pour empêcher les attaques courantes comme l'injection. J'ai mis en
+place une politique de sécurité de contenu pour bloquer le chargement de scripts externes non autorisés,
+ce qui protège l'application et les données des utilisateurs. Chaque échange avec l'API est strictement
+validé pour s'assurer que les données transmises sont au bon format.
+Enfin, pour améliorer l'expérience utilisateur lors d'opérations longues, par exemple l'importation de
+nombreux candidats, j'ai ajouté des barres de progression en temps réel qui se basent sur les événements
+de progression de HttpClient. Ce retour visuel constant rassure l'utilisateur et lui donne une meilleure
+maîtrise de l'application. La gestion des appels API chez SkillTest ne se résume donc pas à de simples
+requêtes, mais constitue une véritable structure d'échanges sécurisés et efficaces.
+50
+E. Sécurisation des accès client et JWT
+La sécurisation côté client repose sur des intercepteurs HTTP qui injectent
+automatiquement le jeton JSON Web (JWT) dans chaque requête sortante vers l'API.
+j'ai également mis en place des gardes de navigation (Guards) qui
+restreignent l'accès aux pages d'administration ou de test en fonction du rôle et
+de l'état d'authentification de l'utilisateur, garantissant une étanchéité
+parfaite entre les zones publiques et privées.
+F. Performance front-end et optimisation
+J'ai mis en place une méthode simple pour m'assurer que l'interface de SkillTest fonctionne bien et reste
+stable.
+Pour les petits morceaux de code (composants, services), j'utilise Karma et Jasmine pour faire des tests
+unitaires. Ça permet de vérifier que chaque calcul de score, formatage de date ou validation de
+formulaire marche comme prévu et qu'une modification n'a rien cassé. Ces tests sont automatiques et se
+lancent directement dans mon environnement de développement.
+Ensuite, pour vérifier que toute l'application fonctionne ensemble, j'ai créé des tests de bout en bout
+avec Cypress. Ces tests simulent le parcours réel d'un utilisateur, de la connexion jusqu'à la fin de
+l'examen. C'est crucial pour attraper les bugs de navigation ou de communication entre les différentes
+parties. Je lance ces tests Cypress avant chaque mise en ligne.
+Enfin, j'ai optimisé les performances de l'application. J'ai utilisé des techniques comme le "Tree Shaking"
+pour enlever le code inutile des bibliothèques externes. Les fichiers (JavaScript et CSS) sont compressés
+et minifiés pour être plus légers à télécharger. J'ai aussi mis en place le "Lazy Loading" pour ne charger
+initialement que le strict nécessaire pour la page d'accueil, ce qui rend l'application plus rapide au
+lancement.
+51
+J'ai mis en place une procédure pour gérer les mises à jour de l'interface. Chaque nouvelle version est
+enregistrée avec une étiquette (un tag) dans mon dépôt Git, ce qui permet de revenir en arrière très
+rapidement si un bug important est découvert après la mise en production. J'ai aussi utilisé des outils
+d'analyse de code comme ESLint et Prettier pour que tout le code soit uniforme et facile à relire ou
+modifier.
+Pour la performance, surtout sur les appareils moins puissants, j'ai optimisé la gestion des composants
+Angular en désactivant la vérification automatique des changements pour les parties de l'application qui
+ne bougent pas. Cette technique ("OnPush Change Detection") diminue l'effort demandé au navigateur et
+rend l'interface plus réactive tout en préservant la batterie. Pour ce projet, l'objectif était de structurer
+mon travail pour livrer une interface utilisateur de qualité.
+G. Stratégie de tests unitaires (Jasmine)
+52
+La qualité du code front-end est une priorité absolue et est rigoureusement assurée par l'implémentation
+de tests unitaires systématiques. J'ai personnellement mis en place cette stratégie de test en utilisant la
+combinaison puissante des frameworks Karma et Jasmine.
+Cette approche garantit une couverture complète et granulaire du code. Chaque élément crucial du
+front-end, qu'il s'agisse d'un composant essentiel à l'interface utilisateur, d'un service de calcul de score
+complexe assurant la logique métier, ou d'une transformation de données critique pour la bonne
+interprétation des informations, est vérifié individuellement et isolément.
+L'objectif principal de ces tests est de fournir un filet de sécurité robuste pour le projet SkillTest. Ils
+garantissent avec certitude que les futures évolutions du projet, les refactorisations ou l'ajout de
+nouvelles fonctionnalités ne provoqueront pas de régressions, c'est-à-dire qu'elles ne casseront pas les
+fonctionnalités existantes et qui sont opérationnelles. L'intégration continue et l'exécution régulière de
+cette suite de tests unitaires sont donc un pilier essentiel de la stabilité et de la maintenabilité du code sur
+le long terme.
+53
+H. Industrialisation et déploiement front-end
+Pour le développement du front-end de SkillTest, j'ai opté pour une architecture moderne et
+performante, en m'appuyant principalement sur Angular pour la structure applicative.
+La gestion du code et des dépendances est rigoureuse, et un système de compilation complet a été mis
+en place. Ce système, orchestré par Webpack, est crucial pour la phase de production. Il prend en
+charge la transformation du code source, notamment le TypeScript, en JavaScript optimisé pour les
+navigateurs.
+Un élément clé de cette optimisation est l'utilisation de la compilation Ahead-of-Time (AOT) d'Angular.
+Contrairement à la compilation Just-in-Time (JIT) effectuée au runtime dans le navigateur, l'AOT compile
+les templates et les composants Angular lors de la phase de build. Cela élimine le besoin d'inclure le
+compilateur Angular dans le bundle final, ce qui réduit considérablement la taille du package et accélère
+le temps de chargement initial de l'application.
+Concernant le style, j'ai choisi Tailwind CSS. L'intégration des styles Tailwind dans le processus de build
+garantit que seul le CSS strictement nécessaire (utilisé dans les composants) est inclus dans le bundle
+final.
+Le résultat de cette chaîne de compilation est un code final minifié et optimisé. La minification réduit la
+taille des fichiers JavaScript et CSS en supprimant les espaces inutiles, les commentaires et en
+raccourcissant les noms de variables. L'ensemble de ces optimisations prépare la plateforme pour un
+déploiement en production sur un serveur Nginx.
+L'objectif final est de garantir une plateforme rapide, réactive et sans superflu, offrant ainsi une
+expérience utilisateur fluide et professionnelle pour l'évaluation des compétences.
+54
+BLOC 3 : DÉVELOPPER LE BACK-END (SERVICES ET PERSISTANCE)
+55
+A. Architecture de persistence et modélisation SQL
+B. Logique métier Node.js et Éco-conception Back-end
+Le back-end de la plateforme SkillTest respecte les principes du Green IT (Éco-conception) . j'ai optimisé
+les algorithmes pour réduire la complexité cyclomatique et donc la consommation CPU des serveurs. Par
+exemple, les traitements lourds de correction sont mis en file d'attente (Jobs) pour lisser la charge
+énergétique.
+Le back-end est conçu comme une architecture de
+services modulaire et robuste, s'appuyant sur l'environnement Node.js.
+L'utilisation du langage TypeScript côté serveur apporte une rigueur de typage
+essentielle pour sécuriser la logique métier complexe liée à la gestion des
+dossiers et des scores. j'ai adopté le pattern architectural MVC simplifié,
+où les contrôleurs gèrent uniquement la réception et la validation des requêtes,
+tandis que la véritable intelligence du système réside dans une couche de
+services entièrement découplée.
+La gestion des flux asynchrones, pilier de Node.js, est exploitée pour offrir une
+réactivité maximale du serveur lors des pics de charge. Pour SkillTest, le moteur
+de correction a été implémenté à l'aide de files d'attente asynchrones pour les
+traitements lourds, comme la génération de statistiques comparatives sur des
+bases de données de candidats massives. J'utilise également le moteur de
+templates pour générer dynamiquement les courriels transactionnels et les
+rapports d'évaluation, assurant une communication personnalisée.
+En matière de scalabilité, l'architecture a été pensée pour être déployée dans
+des environnements de conteneurisation comme Docker, permettant ainsi une mise à
+l'échelle horizontale extrêmement simple. Si le nombre d'utilisateurs simultanés
+explose, il suffit de lancer plusieurs instances du service API et de répartir la
+charge via un load balancer. Cette élasticité infrastructurelle est complétée par
+une gestion fine de la configuration environnementale, utilisant des variables
+sécurisées pour stocker les secrets.
+56
+j'ai également mis en œuvre une architecture basée sur les événements (EDA)
+pour certaines fonctionnalités transversales comme le logging d'audit ou les
+notifications en temps réel. Cette approche permet de découpler les émetteurs
+d'événements des récepteurs, rendant le système plus flexible et moins sujet aux
+pannes en cascade. Par exemple, lorsqu'un candidat termine son test, un événement
+est émis et capté par le service de calcul de score, le service de mail et le
+service de notification Admin.
+Enfin, pour assurer une documentation de qualité pour les futurs développeurs ou
+pour les partenaires souhaitant s'intégrer à SkillTest, j'ai généré une
+documentation API exhaustive à l'aide de l'outil Swagger. Chaque point de
+terminaison, chaque format de requête et chaque réponse possible est décrit
+précisément, offrant un terrain d'entente technique clair et sans ambiguïté.
+Cette ouverture technique fait de mon back-end un service de classe entreprise.
+57
+C. Système de paiement et stratégie de monétisation
+Pour assurer la viabilité commerciale de SkillTest, j'ai intégré un système
+de paiement sécurisé via l'API Stripe. Ce module permet aux entreprises de
+souscrire à des abonnements mensuels ou acheter des packs de tests à l'unité.
+j'ai mis en place une logique de monétisation flexible (Pay-as-you-go)
+incluant la gestion des factures automatiques et le suivi des consommations,
+garantissant ainsi un flux de revenus stable et automatisé pour la plateforme.
+58
+D. Développement d'API sécurisée et standardisée
+La couche de persistance de SkillTest repose sur une base de données SQL
+hautement structurée, garantissant l'intégrité et la fiabilité des données
+collectées. j'ai utilisé l'ORM Sequelize pour interagir avec le moteur
+MySQL, offrant ainsi une abstraction sécurisée tout en conservant la puissance.
+J'applique une politique de Validation et Filtrage Strict des données entrantes (via la librairie Joi ou Zod).
+Aucune donnée utilisateur n'atteint la couche métier sans avoir été nettoyée (Trim, Sanitize) et typée,
+bloquant ainsi 99% des payloads malveillants.
+De plus, nous assurons le Chiffrement des Données Sensibles . Les mots de passe sont hachés (Bcrypt), et
+les clés API tierces (Stripe) sont chiffrées au repos en base de données (AES-256), rendant une fuite de la
+BDD inexploitable par un tiers.
+des requêtes relationnelles. Le schéma de données a été modélisé en respectant
+scrupuleusement les principes de normalisation, évitant ainsi toute redondance
+inutile. Cette modélisation intelligente offre une flexibilité totale.
+Pour optimiser les performances de lecture lors de l'affichage des dashboards
+statistiques, j'ai mis en place une stratégie d'indexation avancée. Les
+colonnes fréquemment recherchées, comme les adresses email, les identifiants de
+sessions ou les dates de passage, sont indexées pour garantir des temps de
+réponse inférieurs à cent millisecondes même sur des millions de lignes de
+résultats. J'utilise également des vues SQL pour simplifier les calculs de
+moyennes et de classements complexes.
+59
+La fiabilité des enregistrements est assurée par l'utilisation systématique de
+transactions SQL lors de la soumission d'une évaluation complète. On s'assure
+ainsi que soit toutes les réponses d'un candidat et son score final sont
+enregistrés ensemble, soit qu'aucune modification n'est faite en cas de crash
+partiel, évitant les données orphelines. Enfin, la sauvegarde des données est
+automatisée quotidiennement sur un stockage cloud isolé, garantissant une reprise
+d'activité rapide en cas de catastrophe logicielle.
+j'ai également mis en œuvre des procédures de nettoyage automatique des
+données temporaires, comme les sessions de tests abandonnées ou les fichiers de
+logs trop anciens, pour éviter toute saturation inutile du disque dur serveur.
+Cette gestion proactive de l'espace disque s'inscrit dans une démarche
+d'éco-conception logicielle visant à réduire l'empreinte environnementale de
+l'application en ne conservant que l'essentiel.
+Enfin, pour assurer une sécurité maximale des données au repos, j'ai activé
+le chiffrement transparent de la base de données au niveau du système de fichiers
+de l'hôte AWS. Même si un accès physique aux disques durs était obtenu, les
+données resteraient parfaitement illisibles sans les clés de chiffrement
+correspondantes, protégées dans un coffre-fort numérique dédié. mon gestion de
+la persistance ne laisse donc rien au hasard.
+60
+E. Automatisation des tests et assurance qualité
+La fiabilité du moteur de correction est garantie par une suite de tests
+d'intégration robustes. J'utilise Jest pour simuler des scénarios complets
+de soumission d'examen et vérifier que les calculs de scores sont exacts à cent
+pour cent. Ces tests automatisés couvrent également les cas d'erreur réseau et
+les tentatives de triche, assurant une intégrité totale de la donnée stockée.
+61
+F. Industrialisation back-end et CI/CD
+L'étape finale de l'industrialisation du back-end de SkillTest consiste en la
+mise en place d'une infrastructure de déploiement continu garantissant une
+disponibilité maximale globale. J'utilise un système de gestion de processus
+pour serveurs Node.js chargé de surveiller l'exécution de l'API en production. En
+cas de crash inattendu, le service est redémarré instantanément par le
+gestionnaire, minimisant ainsi le temps d'indisponibilité pour les utilisateurs
+finaux.
+62
+Le déploiement est orchestré par des pipelines automatisés qui assurent la
+transition sans couture du code source vers les serveurs cloud. À chaque commit
+validé sur la branche de production, une suite complète de tests d'intégration
+et de sécurité est lancée. Si tous les voyants sont au vert, l'image Docker est
+reconstruite avec les nouvelles fonctionnalités et déployée selon une stratégie
+de Blue-Green, permettant des mises à jour fréquentes sans aucune coupure.
+La maintenance applicative est facilitée par une journalisation exhaustive de
+tous les événements système via un service de logging centralisé. Chaque erreur
+500, chaque temps de réponse supérieur à un seuil défini ou chaque tentative
+d'accès non autorisé est consigné avec son contexte technique complet, permettant
+une résolution ultra-rapide par les ingénieurs en charge du support. Nous
+effectuons également des revues de performance mensuelles.
+j'ai également instauré une procédure de Disaster Recovery Plan testée
+périodiquement pour garantir la résilience du système face à des pannes
+d'infrastructure majeures. En cas de défaillance complète d'un centre de données
+AWS, je suis capables de faire remonter l'intégralité de la plateforme
+SkillTest dans une autre région géographique en moins de trente minutes grâce à
+mes scripts d'infrastructure-as-code.
+Enfin, pour faciliter la maintenance corrective, j'ai mis en place un
+système de Health Check accessible par mon outil de monitoring externe. Cela
+nous permet de savoir en permanence, minute après minute, si l'API est capable de
+se connecter à la DB, si elle possède assez de RAM disponible et si tous les
+services tiers dont elle dépend répondent positivement. L'industrialisation et la
+maintenance chez SkillTest sont des services d'excellence.
+63
+G. Gestion des Migrations et Monitoring
+Pour garantir l'évolutivité de la base de données sans perte, j'ai proscrit les modifications manuelles
+(ALTER TABLE en direct). Un système de Migrations (via Sequelize CLI) permet de versionner l'état de la
+base. Chaque altération de schéma (ajout de table, colonne) est un script codé, testé et réversible
+(Rollback), assurant que l'ensemble des développeurs et la production soient synchronisés sur la même
+version structurelle.
+En parallèle, j'ai renforcé le Monitoring applicatif :
+Logs structurés (Winston) : Pour tracer chaque erreur critique avec son contexte (Stacktrace, UserID).
+Healthcheck Endpoint : Une route API `/health` pour vérifier l'état des services vitaux (DB Connectivité,
+Redis).
+Performance Metrics : Suivi des temps de réponse des routes critiques pour détecter les régressions.
+Cette couche d'observabilité garantit que le système est non seulement maintenable, mais pilotable
+proactivement en production.
+64
+5. JOURNAL DE BORD DÉTAILLÉ (60 JOURS D'IMMERSION)
+Jour 1 : Lancement officiel du projet de certification SkillTest Enterprise.
+Définition des objectifs macro et prise de contact avec les parties prenantes.
+Rédaction de la première ébauche de la note de cadrage stratégique.
+Jour 2 : Analyse approfondie du marché des plateformes d'évaluation technique.
+Identification des concurrents majeurs et définition de la valeur ajoutée
+unique de SkillTest en termes de protection contre la triche et de scalabilité.
+Jour 3 : Finalisation de la note de cadrage (E1). Présentation du document au
+tuteur de projet Yves LE NET. Validation de la vision produit et du périmètre.
+Jour 4 : Début de la phase de planification (E2). Découpage du projet en sept
+phases majeures et identification des jalons critiques pour les douze semaines.
+Jour 5 : Estimation des charges de travail et établissement du budget
+prévisionnel. Prise en compte des coûts d'infrastructure AWS et Docker.
+Jour 6 : Création du dépôt GitHub officiel. Mise en place de l'arborescence
+standard pour le projet Mono-Repo (Client/Server/Common). Configuration Git.
+Jour 7 : Étude comparative des frameworks front-end. Choix définitif d'Angular
+pour sa robustesse en entreprise par rapport à React ou Vue.js.
+Jour 8 : Préconisations techniques (E3). Justification du choix de la stack
+technique : Angular, Node.js, Express, MySQL et TypeScript pour le typage.
+Jour 9 : Modélisation UML (E8) - Élaboration du diagramme de cas d'utilisation
+principal mettant en scène les acteurs : Candidat, Recruteur et Admin.
+Jour 10 : Conception du diagramme de classes. Définition des entités métier :
+Users, Tests, Questions, Results et Sessions. Validation des cardinalités.
+Jour 11 : Modélisation physique des données. Création du schéma SQL normalisé
+en troisième forme normale pour éviter toute redondance future.
+65
+Jour 12 : Début de l'industrialisation par la virtualisation (E4). Rédaction
+du premier fichier Dockerfile pour l'API Node.js et configuration Nginx.
+Jour 13 : Mise en place de Docker Compose pour orchestrer les conteneurs :
+API, Base de données et Client Web. Premier lancement réussi de la stack locale.
+Jour 14 : Configuration de la méthodologie Agile (E5). Création du board
+Trello avec les colonnes Scrum : Backlog, Sprint, Doing, Review, Done.
+Jour 15 : Définition de la trame de reporting hebdomadaire (E6). Rédaction
+du premier compte rendu d'activité pour les parties prenantes.
+Jour 16 : Première phase de design UX (E7). Création des "Wireframes" basse
+fidélité pour le parcours candidat. Focus sur l'épuration de l'interface.
+Jour 17 : Réalisation des maquettes haute fidélité sur Figma. Définition de
+la charte graphique : bleu profond, gris technique et typographie moderne.
+Jour 18 : Prototypage interactif sur Figma. Test de navigation avec des
+utilisateurs réels pour valider l'emplacement des boutons de navigation.
+Jour 19 : Audit de sécurité précoce (E9). Rédaction de la politique de
+sécurité basée sur l'OWASP Top 10. Focus sur la prévention des injections.
+Jour 20 : Analyse d'impact RGPD. Rédaction des mentions légales et des
+procédures de gestion des données personnelles des candidats.
+Jour 21 : Veille technologique (E10). Étude de l'API Signals d'Angular et
+décision de l'intégrer au projet pour optimiser les performances de l'UI.
+Jour 22 : Initialisation du projet Angular. Configuration des Standalone
+Components et mise en place du routing principal de l'application.
+Jour 23 : Développement du système d'authentification front-end. Création
+des formulaires de connexion et d'inscription avec validation dynamique.
+Jour 24 : Initialisation du serveur Node.js avec Express. Configuration
+de TypeScript et mise en place de la structure de dossiers par couches.
+Jour 25 : Configuration de Sequelize pour la couche de persistance. Rédaction
+des premières migrations pour créer les tables de base de données MySQL.
+66
+Jour 26 : Développement de l'API d'authentification. Utilisation de Bcrypt
+pour le hachage des mots de passe et JSON Web Token pour les sessions.
+Jour 27 : Intégration Client-Serveur réussie pour le module de login. Mise
+en place de l'intercepteur HTTP pour la gestion automatique des tokens.
+Jour 28 : Création du service de gestion des tests. Développement des routes
+CRUD pour la création de nouvelles évaluations techniques complexes.
+Jour 29 : Développement du moteur de passage de test côté client. Utilisation
+de RxJS pour gérer le chronomètre de session et les flux de réponses.
+Jour 30 : Mise en place du moteur de correction automatique côté serveur.
+Logique de calcul de score basée sur les coefficients des questions.
+Jour 31 : Développement du dashboard recruteur. Affichage des listes de
+candidats et de leurs statuts de tests en temps réel via WebSockets.
+Jour 32 : Création des composants de visualisation de données. Intégration
+de graphiques pour afficher la répartition des scores par technologie.
+Jour 33 : Mise en œuvre de l'accessibilité numérique. Audit WCAG des
+premiers composants et correction des contrastes de couleurs défaillants.
+Jour 34 : Développement de la fonctionnalité d'export PDF. Utilisation d'une
+bibliothèque Node.js pour générer les rapports de résultats formatés.
+Jour 35 : Phase intensive de tests unitaires avec Jasmine et Karma. Écriture
+des tests pour les services de calcul de score et les transformateurs.
+Jour 36 : Tests de bout en bout avec Cypress. Automatisation du parcours
+complet d'un candidat, de la connexion jusqu'à la soumission finale.
+Jour 37 : Optimisation des performances front-end. Mise en place du Lazy
+Loading pour les modules d'administration et minification des actifs.
+Jour 38 : Configuration de la pipeline CI/CD sur GitHub Actions. Build
+automatique des images Docker à chaque commit sur la branche main.
+Jour 39 : Premier déploiement sur l'infrastructure de recette AWS. Tests
+de connectivité et de performance réseau en environnement réel cloud.
+67
+Jour 40 : Revue de sprint et démonstration au tuteur. Recueil des feedbacks
+sur l'ergonomie du dashboard recruteur et planification des ajustements.
+Jour 41 : Travail sur la résilience réseau. Implémentation de stratégies
+de retry RxJS pour les appels API critiques lors du passage des tests.
+Jour 42 : Sécurisation avancée des headers HTTP . Configuration du module
+Helmet et des politiques CORS pour restreindre les accès non autorisés.
+Jour 43 : Développement du système de notifications par email. Intégration
+d'un service tiers pour l'envoi automatisé des convocations aux tests.
+Jour 44 : Optimisation des requêtes SQL. Ajout d'index stratégiques sur la
+base de données pour accélérer l'affichage des historiques de résultats.
+Jour 45 : Finalisation du module multi-tenant. Isolation de la logique
+métier par entreprise cliente au sein de la même base de données SQL.
+Jour 46 : Documentation technique API (Swagger). Rédaction des descriptions
+pour chaque endpoint et définition des schémas de données JSON.
+Jour 47 : Audit final d'accessibilité. Vérification de la compatibilité
+avec les lecteurs d'écran NVDA et VoiceOver sur l'interface de test.
+Jour 48 : Préparation du dossier de soutenance. Structuration des chapitres
+et sélection des extraits de code les plus significatifs pour le jury.
+Jour 49 : Rédaction des analyses de scénarios de test. Documentation des
+cas limites (Edge Cases) et des réponses apportées par le système.
+Jour 50 : Revue finale du bloc 1. Vérification de la cohérence entre les
+maquettes Figma, les diagrammes UML et l'implémentation finale.
+Jour 51 : Revue finale du bloc 2. Optimisation du cycle de vie des
+composants Angular pour réduire la charge CPU lors des tests longs.
+Jour 52 : Revue finale du bloc 3. Tests de pénétration automatisés sur
+l'API pour détecter d'éventuelles failles de sécurité non traitées.
+68
+Jour 53 : Mise à jour de la documentation utilisateur. Rédaction du guide
+de prise en main pour les administrateurs et pour les candidats.
+Jour 54 : Répétition orale de la soutenance. Chronométrage des phases de
+présentation et de démonstration technique devant des pairs.
+Jour 55 : Finalisation du glossaire narratif. Définition pédagogique de
+chaque concept clé du développement Full Stack utilisé dans SkillTest.
+Jour 56 : Intégration des derniers retours esthétiques. Ajustements de
+quelques pixels sur le dashboard pour une harmonie visuelle absolue.
+Jour 57 : Nettoyage final du code source. Suppression des logs de debug et
+vérification de la conformité avec les règles de linting strictes.
+Jour 58 : Archivage des versions de production. Création du tag de version
+1.0.0 Enterprise Edition sur le dépôt de code source GitHub.
+Jour 59 : Relecture croisée du dossier de validation. Correction des
+coquilles et vérification de la fluidité narrative du document complet.
+Jour 60 : Signature et export final du dossier de validation. Clôture de la
+phase de développement et remise des livrables au centre de formation.
+69
+6. CONCLUSION GÉNÉRALE ET BILAN DU CANDIDAT
+La réalisation du projet SkillTest a été pour moi une aventure technologique et
+humaine d'une intensité rare, marquant une étape décisive dans mon parcours de
+développeur full stack. En parcourant l'ensemble du cycle de vie de cette
+plateforme, de la page blanche de la note de cadrage jusqu'à la complexité d'une
+mise en production cloud sécurisée, j'ai pu démontrer ma capacité à transformer une
+vision métier en une solution logicielle concrète, robuste et élégante.
+Le bilan de ce projet est extrêmement positif, tant sur le plan fonctionnel que
+sur le plan de l'apprentissage personnel. SkillTest n'est pas qu'une simple
+démonstration technique, c'est un produit fini capable de répondre aux besoins
+réels des entreprises dans un domaine critique comme le recrutement. La maîtrise
+des trois blocs de compétences – conception et modélisation, développement front-
+end réactif, et gestion des services back-end persistants – constitue désormais
+pour moi un socle de compétences solide et cohérent.
+L'expertise acquise durant ces soixante jours dépasse le cadre purement
+informatique. J'ai appris à gérer des budgets, à planifier des ressources de
+manière agile et à communiquer avec clarté sur des problématiques complexes auprès
+de parties prenantes aux attentes variées. Cette dimension transversale est ce
+qui définit, à mon sens, un développeur Full Stack accompli aujourd'hui : un
+professionnel capable de faire le pont entre la technologie et les enjeux de
+l'entreprise. SkillTest est la preuve tangible de cette double compétence.
+En conclusion, ce dossier de validation atteste de mon aptitude professionnelle à
+piloter des projets numériques d'envergure. Je me tiens prêt à défendre mes
+choix d'architecture et de mise en œuvre devant le jury, avec la conviction que
+SkillTest représente le futur de l'évaluation technique en entreprise. Mon
+engagement futur en tant que Développeur Full Stack sera guidé par cette même
+quête d'excellence, avec pour objectif constant de créer des solutions
+innovantes capables d'impacter positivement le quotidien des organisations.
+Fait à Paris, le 22 janvier 2026.
+Anouar Abdelmajid.
+Ingénieur en informatique.
+70
+71
