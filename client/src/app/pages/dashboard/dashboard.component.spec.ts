@@ -11,7 +11,8 @@ describe('DashboardComponent', () => {
     beforeEach(async () => {
         // Mock user for dashboard
         const aSpy = jasmine.createSpyObj('AuthService', [], {
-            currentUser: () => ({ id: 1, role: 'candidate' })
+            currentUser: () => ({ id: 1, role: 'candidate' }),
+            getToken: () => 'fake-token'
         });
 
         await TestBed.configureTestingModule({

@@ -28,7 +28,7 @@ describe('AuthService', () => {
 
         service.login({ email: 'test@example.com', password: 'password' }).subscribe(response => {
             expect(response.token).toBe('fake-token');
-            expect(localStorage.getItem('token')).toBe('fake-token');
+            expect(localStorage.getItem('auth_token')).toBe('fake-token');
         });
 
         const req = httpMock.expectOne('http://localhost:5001/api/auth/login');
