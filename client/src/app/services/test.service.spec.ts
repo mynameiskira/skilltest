@@ -87,5 +87,32 @@ describe('TestService', () => {
         const req = httpMock.expectOne(`${apiUrl}/candidates/invite`);
         expect(req.request.method).toBe('POST');
         req.flush({});
+        // Coverage for updateTest
+        it('updateTest should call PUT', () => {
+            service.updateTest(1, { title: 'U' }).subscribe();
+            const req = httpMock.expectOne(`${apiUrl}/tests/1`);
+            expect(req.request.method).toBe('PUT');
+            req.flush({});
+        });
+
+        // Coverage for checkout
+        it('checkout should call POST payment', () => {
+            service.checkout('basic').subscribe();
+            const req = httpMock.expectOne(`${apiUrl}/payments/checkout`);
+            expect(req.request.method).toBe('POST');
+            req.flush({});
+        });
+
+        // Coverage for review
+        it('review methods should call API', () => {
+            service.getResultForReview(1).subscribe();
+            const req1 = httpMock.expectOne(`${apiUrl}/results/1/review`);
+            expect(req1.request.method).toBe('GET');
+            req1.flush({});
+
+            service.updateReviewStatus(1, 'approved').subscribe();
+            const req2 = httpMock.expectOne(`${apiUrl}/results/1/review`);
+            expect(req2.request.method).toBe('PATCH');
+            req2.flush({});
+        });
     });
-});

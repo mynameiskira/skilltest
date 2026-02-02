@@ -63,6 +63,12 @@ export class TestService {
         });
     }
 
+    inviteCandidate(data: { testId: number, emails: string[] }) {
+        return this.http.post(`${this.apiUrl}/candidates/invite`, data, {
+            headers: { Authorization: `Bearer ${this.auth.getToken()}` }
+        });
+    }
+
     // Review methods
     getResultForReview(resultId: number) {
         return this.http.get<any>(`${this.apiUrl}/results/${resultId}/review`, {
